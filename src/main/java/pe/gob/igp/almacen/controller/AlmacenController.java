@@ -5,21 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("bien")
-public class BienController {
+@RequestMapping("almacen")
+public class AlmacenController {
 
-    @GetMapping({"","/"})
+    @GetMapping({"","listar"})
     public String index(){
-        return "bien/listar";
+        return "item/listar";
     }
 
     @GetMapping("nuevo")
     public String nuevo(){
-        return "bien/nuevo";
+        return "item/nuevo";
     }
     
-    @GetMapping("listar")
-    public String listar(){
-        return "bien/listar";
-    }
+   
 }

@@ -9,23 +9,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@RequestMapping("/orden-salida")
+@RequestMapping("/salida")
 @Controller
-public class OrdenSalidaController {
-        
-    @GetMapping("/steps")
-    public String steps(){
-        return "orden-salida/nuevo2";
-    }
-
-    @GetMapping("/listar")
-    public String listar(){
-        return "orden-salida/listar";
+public class SalidaController {
+    
+    @GetMapping({"","listar"})
+    public String home(){
+        return "salida/listar";
     }
 
     @GetMapping("/nuevo")
-    public String nuevo(){
-        return "orden-salida/nuevo";
+    public String steps(){
+        return "salida/nuevo";
     }
 
     @GetMapping("/editar/{id}")
@@ -45,8 +40,5 @@ public class OrdenSalidaController {
         return "inventario";
     }
 
-    @GetMapping("")
-    public String home(){
-        return "layout";
-    }
+    
 }

@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema almacen
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema almacen
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `almacen` DEFAULT CHARACTER SET utf8 ;
+USE `almacen` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`marca`
+-- Table `almacen`.`marca`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`marca` (
+CREATE TABLE IF NOT EXISTS `almacen`.`marca` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -28,34 +28,34 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`modelo`
+-- Table `almacen`.`modelo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`modelo` (
+CREATE TABLE IF NOT EXISTS `almacen`.`modelo` (
   `idmodelo` INT NOT NULL,
   `marca_id` INT NOT NULL,
   PRIMARY KEY (`idmodelo`),
-  INDEX `fk_modelo_marca1_idx` (`marca_id` ASC) VISIBLE,
+  INDEX `fk_modelo_marca1_idx` (`marca_id` ASC) ,
   CONSTRAINT `fk_modelo_marca1`
     FOREIGN KEY (`marca_id`)
-    REFERENCES `mydb`.`marca` (`id`)
+    REFERENCES `almacen`.`marca` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`puesto`
+-- Table `almacen`.`puesto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`puesto` (
+CREATE TABLE IF NOT EXISTS `almacen`.`puesto` (
   `id` INT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`bien`
+-- Table `almacen`.`bien`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`bien` (
+CREATE TABLE IF NOT EXISTS `almacen`.`item` (
   `id` INT NOT NULL,
   `puesto_id` INT NOT NULL,
   `marca_id` INT NOT NULL,
@@ -68,32 +68,32 @@ CREATE TABLE IF NOT EXISTS `mydb`.`bien` (
   `serie` VARCHAR(45) NULL,
   `color` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_bienes_marca1_idx` (`marca_id` ASC) VISIBLE,
-  INDEX `fk_bienes_modelo1_idx` (`modelo_id` ASC) VISIBLE,
-  UNIQUE INDEX `codigo_patrimonial_UNIQUE` (`codigo_patrimonial` ASC) VISIBLE,
-  INDEX `fk_bien_puesto1_idx` (`puesto_id` ASC) VISIBLE,
-  CONSTRAINT `fk_bienes_marca1`
+  INDEX `fk_item_marca1_idx` (`marca_id` ASC) ,
+  INDEX `fk_item_modelo1_idx` (`modelo_id` ASC) ,
+  UNIQUE INDEX `codigo_patrimonial_UNIQUE` (`codigo_patrimonial` ASC) ,
+  INDEX `fk_bien_puesto1_idx` (`puesto_id` ASC) ,
+  CONSTRAINT `fk_item_marca1`
     FOREIGN KEY (`marca_id`)
-    REFERENCES `mydb`.`marca` (`id`)
+    REFERENCES `almacen`.`marca` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bienes_modelo1`
+  CONSTRAINT `fk_item_modelo1`
     FOREIGN KEY (`modelo_id`)
-    REFERENCES `mydb`.`modelo` (`idmodelo`)
+    REFERENCES `almacen`.`modelo` (`idmodelo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_bien_puesto1`
     FOREIGN KEY (`puesto_id`)
-    REFERENCES `mydb`.`puesto` (`id`)
+    REFERENCES `almacen`.`puesto` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`tipo_orden`
+-- Table `almacen`.`tipo_orden`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`tipo_orden` (
+CREATE TABLE IF NOT EXISTS `almacen`.`tipo_orden` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -101,9 +101,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`motivo`
+-- Table `almacen`.`motivo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`motivo` (
+CREATE TABLE IF NOT EXISTS `almacen`.`motivo` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -111,9 +111,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`estado_orden`
+-- Table `almacen`.`estado_orden`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`estado_orden` (
+CREATE TABLE IF NOT EXISTS `almacen`.`estado_orden` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -121,9 +121,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`origen`
+-- Table `almacen`.`origen`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`origen` (
+CREATE TABLE IF NOT EXISTS `almacen`.`origen` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -131,9 +131,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`rol_usuario`
+-- Table `almacen`.`rol_usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`rol_usuario` (
+CREATE TABLE IF NOT EXISTS `almacen`.`rol_usuario` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -141,28 +141,28 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`usuario`
+-- Table `almacen`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
+CREATE TABLE IF NOT EXISTS `almacen`.`usuario` (
   `id` INT NOT NULL,
   `rol_usuario_id` INT NOT NULL,
   `usuario` VARCHAR(45) NULL,
   `clave` VARCHAR(45) NULL,
   `bestado` CHAR(1) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_usuario_rol_usuario1_idx` (`rol_usuario_id` ASC) VISIBLE,
+  INDEX `fk_usuario_rol_usuario1_idx` (`rol_usuario_id` ASC) ,
   CONSTRAINT `fk_usuario_rol_usuario1`
     FOREIGN KEY (`rol_usuario_id`)
-    REFERENCES `mydb`.`rol_usuario` (`id`)
+    REFERENCES `almacen`.`rol_usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`orden`
+-- Table `almacen`.`orden`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`orden` (
+CREATE TABLE IF NOT EXISTS `almacen`.`orden` (
   `id` INT NOT NULL,
   `tipo_orden_id` INT NOT NULL,
   `motivo_id` INT NOT NULL,
@@ -182,59 +182,59 @@ CREATE TABLE IF NOT EXISTS `mydb`.`orden` (
   `fecha_salida` DATETIME NULL,
   `usuario_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orden_tipo_orden_idx` (`tipo_orden_id` ASC) VISIBLE,
-  INDEX `fk_orden_motivo1_idx` (`motivo_id` ASC) VISIBLE,
-  INDEX `fk_orden_estado_orden1_idx` (`estado_orden_id` ASC) VISIBLE,
-  INDEX `fk_orden_origen1_idx` (`origen_id` ASC) VISIBLE,
-  INDEX `fk_orden_usuario1_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `fk_orden_tipo_orden_idx` (`tipo_orden_id` ASC) ,
+  INDEX `fk_orden_motivo1_idx` (`motivo_id` ASC) ,
+  INDEX `fk_orden_estado_orden1_idx` (`estado_orden_id` ASC) ,
+  INDEX `fk_orden_origen1_idx` (`origen_id` ASC) ,
+  INDEX `fk_orden_usuario1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_orden_tipo_orden`
     FOREIGN KEY (`tipo_orden_id`)
-    REFERENCES `mydb`.`tipo_orden` (`id`)
+    REFERENCES `almacen`.`tipo_orden` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_motivo1`
     FOREIGN KEY (`motivo_id`)
-    REFERENCES `mydb`.`motivo` (`id`)
+    REFERENCES `almacen`.`motivo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_estado_orden1`
     FOREIGN KEY (`estado_orden_id`)
-    REFERENCES `mydb`.`estado_orden` (`id`)
+    REFERENCES `almacen`.`estado_orden` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_origen1`
     FOREIGN KEY (`origen_id`)
-    REFERENCES `mydb`.`origen` (`id`)
+    REFERENCES `almacen`.`origen` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`id`)
+    REFERENCES `almacen`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`personal`
+-- Table `almacen`.`personal`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`personal` (
+CREATE TABLE IF NOT EXISTS `almacen`.`personal` (
   `id` INT NOT NULL,
   `puesto_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_personal_puesto1_idx` (`puesto_id` ASC) VISIBLE,
+  INDEX `fk_personal_puesto1_idx` (`puesto_id` ASC) ,
   CONSTRAINT `fk_personal_puesto1`
     FOREIGN KEY (`puesto_id`)
-    REFERENCES `mydb`.`puesto` (`id`)
+    REFERENCES `almacen`.`puesto` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`rol_usuario`
+-- Table `almacen`.`rol_usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`rol_usuario` (
+CREATE TABLE IF NOT EXISTS `almacen`.`rol_usuario` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -242,9 +242,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`orden_detalle`
+-- Table `almacen`.`orden_detalle`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`orden_detalle` (
+CREATE TABLE IF NOT EXISTS `almacen`.`orden_detalle` (
   `id` INT NOT NULL,
   `orden_id` INT NOT NULL,
   `marca` VARCHAR(45) NULL,
@@ -257,57 +257,57 @@ CREATE TABLE IF NOT EXISTS `mydb`.`orden_detalle` (
   `color` VARCHAR(45) NULL,
   `retorna` CHAR(1) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orden_detalle_orden1_idx` (`orden_id` ASC) VISIBLE,
+  INDEX `fk_orden_detalle_orden1_idx` (`orden_id` ASC) ,
   CONSTRAINT `fk_orden_detalle_orden1`
     FOREIGN KEY (`orden_id`)
-    REFERENCES `mydb`.`orden` (`id`)
+    REFERENCES `almacen`.`orden` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`orden_firma`
+-- Table `almacen`.`orden_firma`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`orden_firma` (
+CREATE TABLE IF NOT EXISTS `almacen`.`orden_firma` (
   `id` INT NOT NULL,
   `orden_id` INT NOT NULL,
   `cargo` VARCHAR(45) NULL,
   `nombre` VARCHAR(45) NULL,
   `estado` CHAR(1) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orden_firma_orden1_idx` (`orden_id` ASC) VISIBLE,
+  INDEX `fk_orden_firma_orden1_idx` (`orden_id` ASC) ,
   CONSTRAINT `fk_orden_firma_orden1`
     FOREIGN KEY (`orden_id`)
-    REFERENCES `mydb`.`orden` (`id`)
+    REFERENCES `almacen`.`orden` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`configuracion_firma`
+-- Table `almacen`.`configuracion_firma`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`configuracion_firma` (
+CREATE TABLE IF NOT EXISTS `almacen`.`configuracion_firma` (
   `id` INT NOT NULL,
   `personal_id` INT NOT NULL,
   `cargo` VARCHAR(45) NULL,
   `nombre` VARCHAR(45) NULL,
   `bestado` CHAR(1) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_configuracion_firma_personal1_idx` (`personal_id` ASC) VISIBLE,
+  INDEX `fk_configuracion_firma_personal1_idx` (`personal_id` ASC) ,
   CONSTRAINT `fk_configuracion_firma_personal1`
     FOREIGN KEY (`personal_id`)
-    REFERENCES `mydb`.`personal` (`id`)
+    REFERENCES `almacen`.`personal` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`orden_retorno`
+-- Table `almacen`.`orden_retorno`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`orden_retorno` (
+CREATE TABLE IF NOT EXISTS `almacen`.`orden_retorno` (
   `id` INT NOT NULL,
   `orden_id` INT NOT NULL,
   `comisionado` VARCHAR(45) NULL,
@@ -318,19 +318,19 @@ CREATE TABLE IF NOT EXISTS `mydb`.`orden_retorno` (
   `asignado_area` VARCHAR(45) NULL,
   `fecha_retorno` DATETIME NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orden_retorno_orden1_idx` (`orden_id` ASC) VISIBLE,
+  INDEX `fk_orden_retorno_orden1_idx` (`orden_id` ASC) ,
   CONSTRAINT `fk_orden_retorno_orden1`
     FOREIGN KEY (`orden_id`)
-    REFERENCES `mydb`.`orden` (`id`)
+    REFERENCES `almacen`.`orden` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`orden_retorno_detalle`
+-- Table `almacen`.`orden_retorno_detalle`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`orden_retorno_detalle` (
+CREATE TABLE IF NOT EXISTS `almacen`.`orden_retorno_detalle` (
   `id` INT NOT NULL,
   `orden_retorno_idorden_retorno` INT NOT NULL,
   `marca` VARCHAR(45) NULL,
@@ -343,29 +343,29 @@ CREATE TABLE IF NOT EXISTS `mydb`.`orden_retorno_detalle` (
   `color` VARCHAR(45) NULL,
   `fecha_retorno_prevista` DATETIME NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orden_retorno_detalle_orden_retorno1_idx` (`orden_retorno_idorden_retorno` ASC) VISIBLE,
+  INDEX `fk_orden_retorno_detalle_orden_retorno1_idx` (`orden_retorno_idorden_retorno` ASC) ,
   CONSTRAINT `fk_orden_retorno_detalle_orden_retorno1`
     FOREIGN KEY (`orden_retorno_idorden_retorno`)
-    REFERENCES `mydb`.`orden_retorno` (`id`)
+    REFERENCES `almacen`.`orden_retorno` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`orden_retorno_firma`
+-- Table `almacen`.`orden_retorno_firma`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`orden_retorno_firma` (
+CREATE TABLE IF NOT EXISTS `almacen`.`orden_retorno_firma` (
   `id` INT NOT NULL,
   `orden_retorno_id` INT NOT NULL,
   `cargo` VARCHAR(45) NULL,
   `nombre` VARCHAR(45) NULL,
   `estado` CHAR(1) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_orden_retorno_firma_orden_retorno1_idx` (`orden_retorno_id` ASC) VISIBLE,
+  INDEX `fk_orden_retorno_firma_orden_retorno1_idx` (`orden_retorno_id` ASC) ,
   CONSTRAINT `fk_orden_retorno_firma_orden_retorno1`
     FOREIGN KEY (`orden_retorno_id`)
-    REFERENCES `mydb`.`orden_retorno` (`id`)
+    REFERENCES `almacen`.`orden_retorno` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
