@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head></head>
+<body>
+    <p th:text="'soy un inventario '+ ${id}">hey</p>
+    <p th:text="${autor}"></p>
+    <a th:href="@{autor/{el_autor} (el_autor=${autor})}">_</a>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head th:insert="fragment/header.html :: header"></head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="header-fixed header-mobile-fixed sidebar-enabled page-loading">
+
+    <div th:fragment="main">
+        <!--begin::Main-->
+        <!--begin::Header Mobile-->
+        <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
+            <!--begin::Logo-->
+            <a href="/">
+                <img alt="Logo" src="https://www.colegiofranklinroosevelt.com/intranet/uploads/logo.png"
+                    class="logo-default max-h-30px" />
+            </a>
+            <!--end::Logo-->
+            <!--begin::Toolbar-->
+            <div class="d-flex align-items-center">
+                <button class="btn p-0 burger-icon burger-icon-left rounded-0" id="kt_header_mobile_toggle">
+                    <span></span>
+                </button>
+
+                <button class="btn btn-hover-icon-primary p-0 ml-2" id="kt_aside_mobile_toggle">
+                    <span class="svg-icon svg-icon-xl">
+                        <!--begin::Svg Icon | path:/metronic/theme/html/demo10/dist/assets/media/svg/icons/General/User.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24" />
+                                <path
+                                    d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                    fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                <path
+                                    d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                    fill="#000000" fill-rule="nonzero" />
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                </button>
+            </div>
+            <!--end::Toolbar-->
+        </div>
+        <!--end::Header Mobile-->
+        <div class="d-flex flex-column flex-root">
+            <!--begin::Page-->
+            <div class="d-flex flex-row flex-column-fluid page">
+                <div th:insert="fragment/aside.html::aside" th:remove="tag"></div>
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+                    <!--begin::Header-->
+                    <div id="kt_header" class="header header-fixed">
+                        <!--begin::Header Wrapper-->
+                        <div class="header-wrapper rounded-top-xl d-flex flex-grow-1 align-items-center">
+                            <!--begin::Container-->
+                            <div
+                                class="container-fluid d-flex align-items-center justify-content-end justify-content-lg-between flex-wrap">
+                                <!--begin::Menu Wrapper-->
+                                <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
+                                    <!--begin::Menu-->
+                                    <div id="kt_header_menu"
+                                        class="header-menu header-menu-mobile header-menu-layout-default">
+                                        <!--begin::Nav-->
+                                        <ul class="menu-nav">
+                                            <li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here"
+                                                data-menu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="menu-link menu-toggle">
+                                                    <span class="menu-text">Registrar</span>
+                                                    <i class="menu-arrow"></i>
+                                                </a>
+                                                <div class="menu-submenu menu-submenu-classic menu-submenu-left">
+                                                    <ul class="menu-subnav">
+                                                        <li class="menu-item menu-item-active" aria-haspopup="true">
+                                                            <a href="index.html" class="menu-link">
+                                                                <span class="menu-text">Application</span>
+                                                                <span class="menu-desc"></span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="menu-item" aria-haspopup="true">
+                                                            <a href="builder.html" class="menu-link">
+                                                                <span class="menu-text">Layout Builder</span>
+                                                                <span class="menu-desc"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <!--<li class="menu-item menu-item-open menu-item-submenu menu-item-rel menu-item-open"
+                                                data-menu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="menu-link menu-toggle">
+                                                    <span class="menu-text">Listar</span>
+                                                    <i class="menu-arrow"></i>
+                                                </a>
+                                                <div class="menu-submenu menu-submenu-classic menu-submenu-left">
+                                                    <ul class="menu-subnav">
+                                                        <li class="menu-item menu-item-active" aria-haspopup="true">
+                                                            <a href="index.html" class="menu-link">
+                                                                <span class="menu-text">Application</span>
+                                                                <span class="menu-desc"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>-->
+                                        </ul>
+                                        <!--end::Nav-->
+                                    </div>
+                                    <!--end::Menu-->
+                                </div>
+                                <!--end::Menu Wrapper-->
+                                <!--begin::Toolbar-->
+                                <div class="d-flex align-items-center py-3 py-lg-2">
+
+                                </div>
+                                <!--end::Toolbar-->
+                            </div>
+                            <!--end::Container-->
+                        </div>
+                        <!--end::Header Wrapper-->
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Content-->
+                    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                        <!-- begin:content 2 -->
+                        <!--begin::Subheader-->
+                        <div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
+                            <div
+                                class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                                <!--begin::Info-->
+                                <div class="d-flex align-items-center flex-wrap mr-1">
+                                    <!--begin::Page Heading-->
+                                    <div class="d-flex align-items-baseline flex-wrap mr-5">
+                                        <!--begin::Page Title-->
+                                        <h5 class="text-dark font-weight-bold my-1 mr-5">Órdenes de Salida</h5>
+                                        <!--end::Page Title-->
+                                        <!--begin::Breadcrumb-->
+                                        <ul
+                                            class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                                            <li class="breadcrumb-item text-muted">
+                                                <a href="#" class="text-muted">Órdenes de Salida</a>
+                                            </li>
+                                            <li class="breadcrumb-item active">
+                                                <a href="#" class="text-muted">Registrar </a>
+                                            </li>
+                                        </ul>
+                                        <!--end::Breadcrumb-->
+                                    </div>
+                                    <!--end::Page Heading-->
+                                </div>
+                                <!--end::Info-->
+
+                            </div>
+                        </div>
+                        <!--end::Subheader-->
+                        
+                         <!--begin::Container-->
+                         <div class="container-fluid">
+                            hola mundo!
+                            <form class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="inputEmail4" class="form-label">
+                                        <span class="text-danger">*</span>
+                                        Motivo
+                                    </label>
+                                    <select class="form-select">
+                                        <option value="0"> -- Seleccionar --</option>
+                                        <option>Prestamo Temporal</option>
+                                        <option>Actividades de Mantenimiento</option>
+                                        <option>Reasignacion del bien</option>
+                                        <option>Reubicacion del bien</option>
+                                        <option>Reposición por garantia</option>
+                                        <option>Reparacion y/o mantenimiento</option>
+                                        <option>Revisión técnica del bien</option>
+                                        <option>Cesion en Uso</option>
+                                        <option>Para baja</option>
+                                        <option>Otras actividades por especificar</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputPassword4" class="form-label">
+                                        <span class="text-danger">*</span> Origen</label>
+                                    <select class="form-select">
+                                        <option value="0"> -- Seleccionar --</option>
+                                        <option>MAYORAZGO</option>
+                                        <option>CAMACHO</option>
+                                        <option>ANCON</option>
+                                        <option>JICAMARCA</option>
+                                        <option>AREQUIPA</option>
+                                        <option>HUANCAYO</option>
+                                        <option>JICAMARCA</option>
+                                        <option>ESTACIONES A NIVEL NACIONAL</option>
+                                        <option>OTROS</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputPassword4" class="form-label"><span
+                                            class="text-danger">*</span> Recibe</label>
+                                    <select class="form-select">
+                                        <option value="0"> -- Seleccionar --</option>
+                                        <option>...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputPassword4" class="form-label"><span
+                                            class="text-danger">*</span> Recepciona</label>
+                                    <select class="form-select">
+                                        <option value="0"> -- Seleccionar --</option>
+                                        <option>...</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress" class="form-label"><span class="text-danger">*</span>
+                                        Destino</label>
+                                    <textarea type="text" class="form-control" rows="2"></textarea>
+                                    <code>Máximo de caracteres permitidos 0/500.</code>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputCity" class="form-label">Buscar bienes </label>
+                                    <input type="text" class="form-control" />
+                                    <code>Buscar bienes <i data-feather="search"></i></code>
+                                </div>
+                                <div class="col-3s">
+                                    <label for="inputAddress2" class="form-label"><span class="text-danger">*</span>
+                                        Fecha de salida</label>
+                                    <input type="text" class="form-control date">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputCity" class="form-label">Fecha de retorno</label>
+                                    <input type="text" class="form-control date">
+                                    <code>Fecha prevista de retorno.</code>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputCity" class="form-label">Orden de salida</label>
+                                    <input type="text" class="form-control" disabled value="2021-0001">
+                                </div>
+                                <div class="col-12">
+                                    <table class="table table-striped ">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">C. Patrimonial</th>
+                                                <th scope="col">C. Inventario</th>
+                                                <th scope="col">Denominación</th>
+                                                <th scope="col">Marca</th>
+                                                <th scope="col">Modelo</th>
+                                                <th scope="col">Serie</th>
+                                                <th scope="col">Color</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Retorna</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>740805000123</td>
+                                                <td>014418</td>
+                                                <td>COMPUTADORA PERSONAL PORTATIL</td>
+                                                <td>HEWLETT PACKARD</td>
+                                                <td>PROBOOK 7</td>
+                                                <td>CNU12546W5</td>
+                                                <td>NEGRO</td>
+                                                <td>R</td>
+                                                <td><input type="checkbox" checked></td>
+                                                <td><a><i data-feather="search"></i></a><a><i data-feather="trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                    <td>740805000123</td>
+                                                    <td>014418</td>
+                                                    <td>COMPUTADORA PERSONAL PORTATIL</td>
+                                                    <td>HEWLETT PACKARD</td>
+                                                    <td>PROBOOK 7</td>
+                                                    <td>CNU12546W5</td>
+                                                    <td>NEGRO</td>
+                                                    <td>R</td>
+                                                    <td><input type="checkbox" checked></td>
+                                                    <td><a><i data-feather="search"></i></a><a><i data-feather="trash"></i></a></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                    <td>740805000123</td>
+                                                    <td>014418</td>
+                                                    <td>COMPUTADORA PERSONAL PORTATIL</td>
+                                                    <td>HEWLETT PACKARD</td>
+                                                    <td>PROBOOK 7</td>
+                                                    <td>CNU12546W5</td>
+                                                    <td>NEGRO</td>
+                                                    <td>R</td>
+                                                    <td><input type="checkbox" checked></td>
+                                                    <td><a><i data-feather="search"></i></a><a><i data-feather="trash"></i></a></td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <label for="inputAddress" class="form-label">Observaciones</label>
+                                    <textarea type="text" class="form-control" rows="3">ninguna</textarea>
+                                    <code>Máximo de caracteres permitidos 0/500.</code>
+                                </div>
+                                <div class="col-6">
+                                    <label for="inputAddress" class="form-label">Accesorios</label>
+                                    <textarea type="text" class="form-control" rows="3">no aplica</textarea>
+                                    <code>Máximo de caracteres permitidos 0/500.</code>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success">Generar O.Salida</button>
+                                </div>
+                            </form>
+
+                         </div>
+                        <!--end::Container-->
+
+                    </div>
+                    <!--end::Content-->
+                    <div th:insert="fragment/footer.html::footer"></div>
+                </div>
+                <!--end::Wrapper-->
+                <!-- content 1 -->
+            </div>
+            <!--end::Page-->
+        </div>
+        <!--end::Main-->
+    </div>
+    <div th:insert="fragment/notification.html :: notification"></div>
+    <div th:insert="fragment/action.html :: action"></div>
+    <div th:insert="fragment/chat.html :: chat"></div>
+    <!--begin::Scrolltop-->
+    <div id="kt_scrolltop" class="scrolltop">
+        <span class="svg-icon">
+            <!--begin::Svg Icon | path:/metronic/theme/html/demo10/dist/assets/media/svg/icons/Navigation/Up-2.svg-->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <polygon points="0 0 24 0 24 24 0 24" />
+                    <rect fill="#000000" opacity="0.3" x="11" y="10" width="2" height="10" rx="1" />
+                    <path
+                        d="M6.70710678,12.7071068 C6.31658249,13.0976311 5.68341751,13.0976311 5.29289322,12.7071068 C4.90236893,12.3165825 4.90236893,11.6834175 5.29289322,11.2928932 L11.2928932,5.29289322 C11.6714722,4.91431428 12.2810586,4.90106866 12.6757246,5.26284586 L18.6757246,10.7628459 C19.0828436,11.1360383 19.1103465,11.7686056 18.7371541,12.1757246 C18.3639617,12.5828436 17.7313944,12.6103465 17.3242754,12.2371541 L12.0300757,7.38413782 L6.70710678,12.7071068 Z"
+                        fill="#000000" fill-rule="nonzero" />
+                </g>
+            </svg>
+            <!--end::Svg Icon-->
+        </span>
+    </div>
+    <!--end::Scrolltop-->
+
+    <div th:insert="fragment/toolbar.html :: toolbar"></div>
+
+
+    <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
+    <!--begin::Global Config(global config for global JS scripts)-->
+    <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#663259", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#F4E1F0", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
+    <!--end::Global Config-->
+    <!--begin::Global Theme Bundle(used by all pages)-->
+    <script
+        src="https://preview.keenthemes.com/metronic/theme/html/demo10/dist/assets/plugins/global/plugins.bundle.js?v=7.2.5"></script>
+    <script
+        src="https://preview.keenthemes.com/metronic/theme/html/demo10/dist/assets/plugins/custom/prismjs/prismjs.bundle.js?v=7.2.5"></script>
+    <script
+        src="https://preview.keenthemes.com/metronic/theme/html/demo10/dist/assets/js/scripts.bundle.js?v=7.2.5"></script>
+    <!--end::Global Theme Bundle-->
+    <!--begin::Page Vendors(used by this page)-->
+    <script
+        src="https://preview.keenthemes.com/metronic/theme/html/demo10/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?v=7.2.5"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
+    <script
+        src="https://preview.keenthemes.com/metronic/theme/html/demo10/dist/assets/plugins/custom/gmaps/gmaps.js?v=7.2.5"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script
+        src="https://preview.keenthemes.com/metronic/theme/html/demo10/dist/assets/js/pages/widgets.js?v=7.2.5"></script>
+    <!--end::Page Scripts-->
+
+    <!--begin::Page Scripts(used by this page)-->
+	<script src="https://preview.keenthemes.com/metronic/theme/html/demo10/dist/assets/js/pages/custom/wizard/wizard-6.js?v=7.2.5"></script>
+	<!--end::Page Scripts-->
+
+    <script>
+        feather.replace()
+    </script>
+</body>
+<!--end::Body-->
+
+</html>
