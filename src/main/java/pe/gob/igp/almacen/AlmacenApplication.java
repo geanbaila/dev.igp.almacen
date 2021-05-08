@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IgpInventoryApplication {
+public class AlmacenApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IgpInventoryApplication.class, args);
+		SpringApplication.run(AlmacenApplication.class, args);
 	}
 
 }
