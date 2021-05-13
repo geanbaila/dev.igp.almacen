@@ -31,9 +31,9 @@ ENGINE = InnoDB;
 -- Table `almacen`.`modelo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `almacen`.`modelo` (
-  `idmodelo` INT NOT NULL,
+  `id` INT NOT NULL,
   `marca_id` INT NOT NULL,
-  PRIMARY KEY (`idmodelo`),
+  PRIMARY KEY (`id`),
   INDEX `fk_modelo_marca1_idx` (`marca_id` ASC) ,
   CONSTRAINT `fk_modelo_marca1`
     FOREIGN KEY (`marca_id`)
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `almacen`.`item` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_item_modelo1`
     FOREIGN KEY (`modelo_id`)
-    REFERENCES `almacen`.`modelo` (`idmodelo`)
+    REFERENCES `almacen`.`modelo` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_bien_puesto1`

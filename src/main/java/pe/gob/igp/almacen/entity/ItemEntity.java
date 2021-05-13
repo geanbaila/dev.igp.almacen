@@ -18,10 +18,11 @@ public class ItemEntity {
     private Integer id;
     
     @OneToOne
-    @JoinColumn(name="marca_id",referencedColumnName = "id")
+    @JoinColumn(name = "marca_id", referencedColumnName = "id")
     private MarcaEntity marca;
     
-    @Column
+    @OneToOne
+    @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     private ModeloEntity modelo;
     
     @Column
