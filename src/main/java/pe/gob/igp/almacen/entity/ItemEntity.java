@@ -20,6 +20,10 @@ public class ItemEntity {
     @OneToOne
     @JoinColumn(name = "marca_id", referencedColumnName = "id")
     private MarcaEntity marca;
+
+    @OneToOne
+    @JoinColumn(name = "puesto_id", referencedColumnName = "id")
+    private PuestoEntity puesto;
     
     @OneToOne
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")
@@ -28,21 +32,129 @@ public class ItemEntity {
     @Column
     private String denominacion;
     
-    @Column
-    private String codigo_patrimonial;
+    @Column(name = "codigo_patrimonial")
+    private String codigoPatrimonial;
     
-    @Column
-    private String codigo_ambiente;
+    @Column(name = "codigo_ambiente")
+    private String codigoAmbiente;
     
-    @Column
-    private String codigo_inventario;
+    @Column(name = "codigo_inventario")
+    private String codigoInventario;
     
-    @Column
-    private String fecha_inventario;
+    @Column(name  = "fecha_inventario")
+    private String fechaInventario;
     
     @Column
     private String serie;
 
     @Column
     private String color;
+
+    public ItemEntity() {
+    }
+
+    public ItemEntity(MarcaEntity marca, PuestoEntity puesto, ModeloEntity modelo, String denominacion,
+            String codigoPatrimonial, String codigoAmbiente, String codigoInventario, String fechaInventario,
+            String serie, String color) {
+        this.marca = marca;
+        this.puesto = puesto;
+        this.modelo = modelo;
+        this.denominacion = denominacion;
+        this.codigoPatrimonial = codigoPatrimonial;
+        this.codigoAmbiente = codigoAmbiente;
+        this.codigoInventario = codigoInventario;
+        this.fechaInventario = fechaInventario;
+        this.serie = serie;
+        this.color = color;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public MarcaEntity getMarca() {
+        return marca;
+    }
+
+    public void setMarca(MarcaEntity marca) {
+        this.marca = marca;
+    }
+
+    public PuestoEntity getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(PuestoEntity puesto) {
+        this.puesto = puesto;
+    }
+
+    public ModeloEntity getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(ModeloEntity modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getDenominacion() {
+        return denominacion;
+    }
+
+    public void setDenominacion(String denominacion) {
+        this.denominacion = denominacion;
+    }
+
+    public String getCodigoPatrimonial() {
+        return codigoPatrimonial;
+    }
+
+    public void setCodigoPatrimonial(String codigoPatrimonial) {
+        this.codigoPatrimonial = codigoPatrimonial;
+    }
+
+    public String getCodigoAmbiente() {
+        return codigoAmbiente;
+    }
+
+    public void setCodigoAmbiente(String codigoAmbiente) {
+        this.codigoAmbiente = codigoAmbiente;
+    }
+
+    public String getCodigoInventario() {
+        return codigoInventario;
+    }
+
+    public void setCodigoInventario(String codigoInventario) {
+        this.codigoInventario = codigoInventario;
+    }
+
+    public String getFechaInventario() {
+        return fechaInventario;
+    }
+
+    public void setFechaInventario(String fechaInventario) {
+        this.fechaInventario = fechaInventario;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+
 }

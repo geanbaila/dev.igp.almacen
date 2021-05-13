@@ -37,13 +37,19 @@
                                                 </a>
                                                 <div class="menu-submenu menu-submenu-classic menu-submenu-left">
                                                     <ul class="menu-subnav">
-                                                        <li class="menu-item menu-item-active" aria-haspopup="true">
+                                                        <li class="menu-item" aria-haspopup="true">
+                                                            <a th:href="@{/almacen}" class="menu-link">
+                                                                <span class="menu-text">Importar</span>
+                                                                <span class="menu-desc"></span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="menu-item" aria-haspopup="true">
                                                             <a th:href="@{/almacen/nuevo}" class="menu-link">
                                                                 <span class="menu-text">Nuevo</span>
                                                                 <span class="menu-desc"></span>
                                                             </a>
                                                         </li>
-                                                        <li class="menu-item" aria-haspopup="true">
+                                                        <li class="menu-item menu-item-active" aria-haspopup="true">
                                                             <a th:href="@{/almacen}" class="menu-link">
                                                                 <span class="menu-text">Listar</span>
                                                                 <span class="menu-desc"></span>
@@ -75,21 +81,23 @@
                         <!-- begin:content 2 -->
                         <!--begin::Subheader-->
                         <div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
-                            <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                            <div
+                                class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <!--begin::Info-->
                                 <div class="d-flex align-items-center flex-wrap mr-1">
                                     <!--begin::Page Heading-->
                                     <div class="d-flex align-items-baseline flex-wrap mr-5">
                                         <!--begin::Page Title-->
-                                        <h5 class="text-dark font-weight-bold my-1 mr-5">En este momento</h5><br/>
+                                        <h5 class="text-dark font-weight-bold my-1 mr-5">Almacén</h5>
                                         <!--end::Page Title-->
                                         <!--begin::Breadcrumb-->
-                                        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                                        <ul
+                                            class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                             <li class="breadcrumb-item text-muted">
                                                 <a href="#" class="text-muted">menú 1</a>
                                             </li>
-                                            <li class="breadcrumb-item text-muted">
-                                                <a href="#" class="text-muted">menú 2</a>
+                                            <li class="breadcrumb-item active">
+                                                <a href="#" class="text-muted">menú 2 </a>
                                             </li>
                                         </ul>
                                         <!--end::Breadcrumb-->
@@ -97,7 +105,7 @@
                                     <!--end::Page Heading-->
                                 </div>
                                 <!--end::Info-->
-                                
+
                             </div>
                         </div>
                         <!--end::Subheader-->
@@ -105,7 +113,50 @@
                         <div class="d-flex flex-column-fluid">
                             <!--begin::Container-->
                             <div class="container-fluid">
-                                Hola mundo!
+                                
+                                <form class="row g-3">
+                                    <div class="col-12">
+                                        <table class="table table-striped ">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">C. patrimonial</th>
+                                                    <th scope="col">Denominación</th>
+                                                    <th scope="col">Marca</th>
+                                                    <th scope="col">Modelo</th>
+                                                    <th scope="col">Serie</th>
+                                                    <th scope="col">C. ambiente</th>
+                                                    <th scope="col" colspan="3">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody th:each="item : ${prg_item}">
+                                                <tr>
+                                                    <td scope="row" th:text="${item.id}"></td>
+                                                    <td th:text="${item.codigoPatrimonial}"></td>
+                                                    <td th:text="${item.denominacion}"></td>
+                                                    <td th:text="${item.marca.nombre}"></td>
+                                                    <td th:text="${item.modelo.nombre}"></td>
+                                                    <td><span
+                                                        class="label label-inline label-light-primary font-weight-bold">
+                                                        <div th:text="${item.serie}" th:remove="tag"></div>
+                                                    </span></td>
+                                                    <td><span
+                                                        class="label label-inline label-light-success font-weight-bold">
+                                                        <div th:text="${item.codigoAmbiente}" th:remove="tag"></div>
+                                                    </span></td>
+                                                    <td><a onclick="verOrdenSalida(1)"><i data-feather="eye"></i></a></td>
+                                                    <td><a th:href="@{/almacen/editar/{item_id} (item_id = ${item.id})} "><i data-feather="edit"></i></a></td>
+                                                    <td><a th:href="@{/almacen/eliminar/{item_id} (item_id = ${item.id})}"><i data-feather="trash"></i></a></td>
+                                                    
+                                                    
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </form>
+
                             </div>
                             <!--end::Container-->
                         </div>
