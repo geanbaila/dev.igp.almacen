@@ -8,13 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="estado_orden")
-public class EstadoOrdenEntity {
+@Table(name="configuracion_firma")
+public class ConfiguracionFirmaEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column
+    private int personal_id;
+
+    @Column
+    private String cargo;
+
+    @Column
     private String nombre;
+
+    @Column
+    private String bestado;
 }

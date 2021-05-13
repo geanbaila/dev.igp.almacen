@@ -10,9 +10,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="usuario")
 public class UsuarioEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Column
     private String usuario;
@@ -21,7 +22,7 @@ public class UsuarioEntity {
     private String clave;
 
     @Column
-    private Long rol;
+    private Integer rol;
 
     @Column
     private String bestado;
