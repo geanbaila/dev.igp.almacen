@@ -28,6 +28,10 @@ public class ItemEntity {
     @OneToOne
     @JoinColumn(name = "modelo_id", referencedColumnName = "id")
     private ModeloEntity modelo;
+
+    @OneToOne
+    @JoinColumn(name = "estado_item_id", referencedColumnName = "id")
+    private EstadoItemEntity estadoItem;
     
     @Column
     private String denominacion;
@@ -53,12 +57,13 @@ public class ItemEntity {
     public ItemEntity() {
     }
 
-    public ItemEntity(MarcaEntity marca, PuestoEntity puesto, ModeloEntity modelo, String denominacion,
-            String codigoPatrimonial, String codigoAmbiente, String codigoInventario, String fechaInventario,
-            String serie, String color) {
+    public ItemEntity(MarcaEntity marca, PuestoEntity puesto, ModeloEntity modelo, EstadoItemEntity estadoItem,
+            String denominacion, String codigoPatrimonial, String codigoAmbiente, String codigoInventario,
+            String fechaInventario, String serie, String color) {
         this.marca = marca;
         this.puesto = puesto;
         this.modelo = modelo;
+        this.estadoItem = estadoItem;
         this.denominacion = denominacion;
         this.codigoPatrimonial = codigoPatrimonial;
         this.codigoAmbiente = codigoAmbiente;
@@ -98,6 +103,14 @@ public class ItemEntity {
 
     public void setModelo(ModeloEntity modelo) {
         this.modelo = modelo;
+    }
+
+    public EstadoItemEntity getEstado() {
+        return estadoItem;
+    }
+
+    public void setEstado(EstadoItemEntity estadoItem) {
+        this.estadoItem = estadoItem;
     }
 
     public String getDenominacion() {
@@ -156,5 +169,6 @@ public class ItemEntity {
         this.color = color;
     }
 
+    
 
 }

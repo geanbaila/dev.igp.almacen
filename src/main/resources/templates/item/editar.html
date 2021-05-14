@@ -112,46 +112,46 @@
                                 <form class="row g-3" method="POST" th:action="@{/almacen/guardar}">
                                     <div class="col-md-3">
                                         <label for="codigo_patrimonial" class="form-label">C. patrimonial</label>
-                                        <input type="text" class="form-control" name="codigo_patrimonial" />
+                                        <input type="text" class="form-control" name="codigo_patrimonial" th:value="${item.codigoPatrimonial}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="cocdigo_inventario" class="form-label"><span class="text-danger">*</span>
                                             C.Inventario</label>
-                                        <input type="text" class="form-control" name="cocdigo_inventario" />
+                                        <input type="text" class="form-control" name="cocdigo_inventario"  th:value="${item.codigoInventario}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="codigo_ambiente" class="form-label"><span class="text-danger">*</span>
                                             C.Ambiente</label>
-                                        <input type="text" class="form-control" name="codigo_ambiente" />
+                                        <input type="text" class="form-control" name="codigo_ambiente" th:value="${item.codigoAmbiente}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="estado" class="form-label"><span class="text-danger">*</span>
                                             Estado</label>
-                                        <input type="text" class="form-control" name="estado" />
+                                        <input type="text" class="form-control" name="estado" th:value="${item.estado.id}" />
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-12">
                                         <label for="denominacion" class="form-label"><span class="text-danger">*</span>
                                             Denominación</label>
-                                        <textarea type="text" class="form-control" rows="2" name="denominacion"></textarea>
+                                        <textarea type="text" class="form-control" rows="2" name="denominacion"><div th:text="${item.denominacion}" th:remove="tag"></div></textarea>
                                         <code>Máximo de caracteres permitidos 0/100.</code>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">
                                         <label for="marca" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" name="marca" />
+                                        <input type="text" class="form-control" name="marca" th:value="${item.marca.nombre}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="modelo" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" name="modelo"/>
+                                        <input type="text" class="form-control" name="modelo" th:value="${item.modelo.nombre}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="serie" class="form-label">Serie</label>
-                                        <input type="text" class="form-control" name="serie" />
+                                        <input type="text" class="form-control" name="serie" th:value="${item.serie}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="color" class="form-label">Color</label>
-                                        <input type="text" class="form-control" name="color" />
+                                        <input type="text" class="form-control" name="color" th:value="${item.color}" />
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">

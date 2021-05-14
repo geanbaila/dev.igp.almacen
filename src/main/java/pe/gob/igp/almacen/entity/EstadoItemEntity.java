@@ -8,17 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="estado_orden")
-public class EstadoOrdenEntity {
+@Table(name = "estado_item")
+public class EstadoItemEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     private Integer id;
 
     @Column
     private String nombre;
 
-    public EstadoOrdenEntity() {
+    public EstadoItemEntity() {
     }
 
     public Integer getId() {
@@ -38,4 +38,5 @@ public class EstadoOrdenEntity {
     }
 
     
+
 }

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import pe.gob.igp.almacen.entity.EstadoItemEntity;
 import pe.gob.igp.almacen.entity.ItemEntity;
 import pe.gob.igp.almacen.entity.MarcaEntity;
 import pe.gob.igp.almacen.entity.ModeloEntity;
 import pe.gob.igp.almacen.entity.PuestoEntity;
+import pe.gob.igp.almacen.service.EstadoItemService;
 import pe.gob.igp.almacen.service.ItemService;
 import pe.gob.igp.almacen.service.MarcaService;
 import pe.gob.igp.almacen.service.ModeloService;
@@ -38,6 +40,9 @@ public class AlmacenController {
     @Autowired
     private PuestoService puestoService;
 
+    @Autowired
+    private EstadoItemService estadoItemService;
+
     @GetMapping({"","listar"})
     public ModelAndView index(){
         List<ItemEntity> prg_item = itemService.getItem();
@@ -60,7 +65,7 @@ public class AlmacenController {
         @RequestParam(name = "codigo_patrimonial", required = true, defaultValue = "0000") String codigoPatrimonial,
         @RequestParam(name = "codigo_inventario", required = false, defaultValue = "") String codigoInventario,
         @RequestParam(name = "codigo_ambiente", required = false, defaultValue = "") String codigoAmbiente,
-        @RequestParam(name = "estado", required = false, defaultValue = "") String estado,
+        @RequestParam(name = "estado", required = false, defaultValue = "0") Integer estadoItemId,
         @RequestParam(name = "denominacion", required = false, defaultValue = "") String denominacion,
         @RequestParam(name = "marca", required = false, defaultValue = "0") Integer marcaId,
         @RequestParam(name = "modelo", required = false, defaultValue = "0") Integer modeloId,
@@ -74,10 +79,12 @@ public class AlmacenController {
         MarcaEntity marca = marcaService.findById(marcaId);
         PuestoEntity puesto = puestoService.findById(PuestoId);
         ModeloEntity modelo = modeloService.findById(modeloId);
+        EstadoItemEntity estadoItem = estadoItemService.findById(estadoItemId);
         ItemEntity item = new ItemEntity(
             marca,
             puesto,
             modelo,
+            estadoItem,
             denominacion,
             codigoPatrimonial,
             codigoAmbiente,
