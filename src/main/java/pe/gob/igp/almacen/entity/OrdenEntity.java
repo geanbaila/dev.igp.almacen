@@ -22,7 +22,7 @@ public class OrdenEntity {
 
     @OneToOne
     @JoinColumn(name="tipo_orden_id", referencedColumnName="id")
-    private TipoOrdenEntity tipo_orden;
+    private TipoOrdenEntity tipoOrden;
 
     @OneToOne
     @JoinColumn(name="motivo_id", referencedColumnName = "id")
@@ -30,7 +30,7 @@ public class OrdenEntity {
 
     @OneToOne
     @JoinColumn(name="estado_orden_id", referencedColumnName = "id")
-    private EstadoOrdenEntity estado_orden;
+    private EstadoOrdenEntity estadoOrden;
 
     @OneToOne
     @JoinColumn(name="origen_id", referencedColumnName = "id")
@@ -44,28 +44,28 @@ public class OrdenEntity {
     private String destino;
 
     @Column
-    private Date fecha_salida_prevista;
+    private Date fechaSalidaPrevista;
 
     @Column
-    private Date fecha_retorno_prevista;
+    private Date fechaRetornoPrevista;
 
     @Column
     private String comisionado;
 
     @Column
-    private String comisionado_dni;
+    private String comisionadoDni;
 
     @Column
-    private String comisionado_area;
+    private String comisionadoArea;
 
     @Column
     private String autoriza;
 
     @Column
-    private String autoriza_dni;
+    private String autorizaDni;
 
     @Column
-    private String autoriza_area;
+    private String autorizaArea;
 
     @Column
     private String accesorio;
@@ -74,7 +74,157 @@ public class OrdenEntity {
     private String observacion;
 
     @Column
-    private Date fecha_salida;
+    private Date fechaSalida;
+
+    public OrdenEntity() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public TipoOrdenEntity getTipoOrden() {
+        return tipoOrden;
+    }
+
+    public void setTipoOrden(TipoOrdenEntity tipoOrden) {
+        this.tipoOrden = tipoOrden;
+    }
+
+    public MotivoEntity getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(MotivoEntity motivo) {
+        this.motivo = motivo;
+    }
+
+    public EstadoOrdenEntity getEstadoOrden() {
+        return estadoOrden;
+    }
+
+    public void setEstadoOrden(EstadoOrdenEntity estadoOrden) {
+        this.estadoOrden = estadoOrden;
+    }
+
+    public OrigenEntity getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(OrigenEntity origen) {
+        this.origen = origen;
+    }
+
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public Date getFechaSalidaPrevista() {
+        return fechaSalidaPrevista;
+    }
+
+    public void setFechaSalidaPrevista(Date fechaSalidaPrevista) {
+        this.fechaSalidaPrevista = fechaSalidaPrevista;
+    }
+
+    public Date getFechaRetornoPrevista() {
+        return fechaRetornoPrevista;
+    }
+
+    public void setFechaRetornoPrevista(Date fechaRetornoPrevista) {
+        this.fechaRetornoPrevista = fechaRetornoPrevista;
+    }
+
+    public String getComisionado() {
+        return comisionado;
+    }
+
+    public void setComisionado(String comisionado) {
+        this.comisionado = comisionado;
+    }
+
+    public String getComisionadoDni() {
+        return comisionadoDni;
+    }
+
+    public void setComisionadoDni(String comisionadoDni) {
+        this.comisionadoDni = comisionadoDni;
+    }
+
+    public String getComisionadoArea() {
+        return comisionadoArea;
+    }
+
+    public void setComisionadoArea(String comisionadoArea) {
+        this.comisionadoArea = comisionadoArea;
+    }
+
+    public String getAutoriza() {
+        return autoriza;
+    }
+
+    public void setAutoriza(String autoriza) {
+        this.autoriza = autoriza;
+    }
+
+    public String getAutorizaDni() {
+        return autorizaDni;
+    }
+
+    public void setAutorizaDni(String autorizaDni) {
+        this.autorizaDni = autorizaDni;
+    }
+
+    public String getAutorizaArea() {
+        return autorizaArea;
+    }
+
+    public void setAutorizaArea(String autorizaArea) {
+        this.autorizaArea = autorizaArea;
+    }
+
+    public String getAccesorio() {
+        return accesorio;
+    }
+
+    public void setAccesorio(String accesorio) {
+        this.accesorio = accesorio;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public Date getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public void setFechaSalida(Date fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+
+    
+
     
 }
 

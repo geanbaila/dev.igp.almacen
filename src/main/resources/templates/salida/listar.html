@@ -124,54 +124,21 @@
                                                     <th scope="col" colspan="3">Acciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody th:each="orden : ${prg_orden}">
                                                 <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>ORDEN DE SALIDA</td>
-                                                    <td>GEAN BAILA</td>
-                                                    <td>JESUS RIVERA</td>
-                                                    <td>23.04.2021</td>
+                                                    <th scope="row" th:text="${orden.id}"></th>
+                                                    <td th:text="${orden.id}"></td>
+                                                    <td th:text="${orden.id}"></td>
+                                                    <td th:text="${orden.id}"></td>
+                                                    <td th:text="${orden.id}"></td>
                                                     <td><span
                                                         class="label label-inline label-light-primary font-weight-bold">
                                                         Aún no firmas
                                                     </span></td>
                                                     <td><a class="btn btn-bg-light btn-xs">Firmar</a></td>
                                                     <td><a onclick="verOrdenSalida(1)"><i data-feather="eye"></i></a></td>
-                                                    <td><a><i data-feather="edit"></i></a></td>
-                                                    <td><a><i data-feather="trash"></i></a></td>
-                                                    
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>ORDEN DE SALIDA</td>
-                                                    <td>GEAN BAILA</td>
-                                                    <td>JESUS RIVERA</td>
-                                                    <td>22.04.2021</td>
-                                                    <td><span
-                                                        class="label label-inline label-light-primary font-weight-bold">
-                                                        Firmas pendientes
-                                                    </span></td>
-                                                    <td> 2 de 4</td>
-                                                    <td><a onclick="verOrdenSalida(2)"><i data-feather="eye"></i></a></td>
-                                                    <td><a><i data-feather="edit"></i></a></td>
-                                                    <td><a><i data-feather="trash"></i></a></td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>ORDEN DE SALIDA</td>
-                                                    <td>GEAN BAILA</td>
-                                                    <td>JESUS RIVERA</td>
-                                                    <td>21.04.2021</td>
-                                                    <td><span
-                                                        class="label label-inline label-light-success font-weight-bold">
-                                                        Autorizado
-                                                    </span></td>
-                                                    <td><a><i data-feather="check"></i></a></td>
-                                                    <td><a onclick="verOrdenSalida(3)"><i data-feather="eye"></i></a></td>
-                                                    <td><a><i data-feather="edit"></i></a></td>
-                                                    <td><a><i data-feather="trash"></i></a></td>
+                                                    <td><a th:href="@{/salida/editar/{orden_id} (orden_id=${orden.id})}" ><i data-feather="edit"></i></a></td>
+                                                    <td><a th:href="@{/salida/eliminar/{orden_id} (orden_id=${orden.id})}" ><i data-feather="trash"></i></a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
