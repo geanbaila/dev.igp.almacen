@@ -109,7 +109,8 @@
                         <div class="d-flex flex-column-fluid">
                             <!--begin::Container-->
                             <div class="container-fluid">
-                                <form class="row g-3" method="POST" th:action="@{/almacen/guardar}">
+                                <form class="row g-3" method="POST" th:action="@{/almacen/actualizar}">
+                                    <input type="hidden" name="item_id" th:value="${item.id}" />
                                     <div class="col-md-3">
                                         <label for="codigo_patrimonial" class="form-label">C. patrimonial</label>
                                         <input type="text" class="form-control" name="codigo_patrimonial" th:value="${item.codigoPatrimonial}" />
