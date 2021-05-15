@@ -7,6 +7,8 @@ import pe.gob.igp.almacen.entity.UsuarioEntity;
 
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity,Long>{
     
-    @Query("SELECT u FROM UsuarioEntity u WHERE u.usuario = ?1 and u.clave = ?2")
-    List<UsuarioEntity> findOneUser(String usuario, String clave, Long rol);
+    @Query("SELECT u FROM UsuarioEntity u WHERE u.usuario = ?1")
+    UsuarioEntity findUser(String usuario);
+
+    
 }

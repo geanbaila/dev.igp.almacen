@@ -117,17 +117,9 @@
                                         </label>
                                         <select class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <option>Actividades de Mantenimiento</option>
-                                            <option>Cesion en Uso</option>
-                                            <option>Reasignacion del bien</option>
-                                            <option>Reubicacion del bien</option>
-                                            <option>Reposición por garantia</option>
-                                            <option>Reparacion y/o mantenimiento</option>
-                                            <option>Revisión técnica del bien</option>
-                                            
-                                            <option>Prestamo Temporal</option>
-                                            <option>Para baja</option>
-                                            <option>Otras actividades por especificar</option>
+                                            <div th:each="motivo : ${prg_motivo}" th:remove="tag">
+                                            <option th:value="${motivo.id}" th:text="${motivo.nombre}"></option>
+                                            </div>
                                         </select>
                                     </div>
                                     <div class="col-md-3">

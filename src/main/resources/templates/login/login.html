@@ -89,6 +89,12 @@
 									
 								</div>
 								<!--end::Action-->
+
+								<%if (request.getAttribute("error")!= null && Boolean.parseBoolean(request.getAttribute("error").toString())) { %>
+									<div class="alert alert-danger" role="alert">
+										Acceso denegado
+									</div>
+								<% }%>
 							</form>
 							<!--end::Form-->
 						</div>
@@ -110,6 +116,7 @@
 									<button type="button" id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-4">Cancelar</button>
 								</div>
 							</form>
+							
 							<!--end::Form-->
 						</div>
 						<!--end::Forgot-->

@@ -13,8 +13,5 @@ public class UsuarioService{
     @Autowired
     private UsuarioRepository usuarioRepository;
     
-    public List<UsuarioEntity> getUsuario(String usuario, String clave, Long rol){
-        return usuarioRepository.findOneUser(usuario, clave, rol);
-    }
     
 }

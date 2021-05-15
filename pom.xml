@@ -12,7 +12,7 @@
 	<artifactId>almacen</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>almacen</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Software que permite llevar un administración del almacén definido por las grupo, clase, familias y subfamilias de productos, descripciones y unidades de medida, donde el ingreso/salidas/retornos de ítems (suministros, bienes patrimoniales y no patrimoniales) al almacén pueden ser controlados a través de un kardex. Además, de generar órdenes de salida, entrega de encargo, asignación de bienes, traslado interno, hojas de salida, préstamos temporales de los ítems para el despacho en cada comisión e integración con firmas digitales.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -28,6 +28,19 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -48,8 +61,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
-			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -66,12 +78,20 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

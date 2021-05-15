@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import pe.gob.igp.almacen.service.UsuarioService;
 
@@ -19,18 +20,16 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
     
-    @GetMapping("")
+    @RequestMapping({""})
     public String login(){
+        System.out.println("estoy en /login/");
         return "login/login";
     }
 
-    @PostMapping("/autenticar")
-    public String autenticar(@PathParam("usuario") String usuario, @RequestParam("clave") String clave, @RequestParam(name="rol", required =false) Long rol ){
-        return "redirect:/";
-    }
-
-    public String evaluar(){
-        return "login/login";
+    @RequestMapping("autenticar")
+    public ModelAndView loginConErrorMostrar(@RequestParam(value = "error", required = false, defaultValue = "True") boolean error) {
+        System.out.println("acá hubo un error:"+error);
+        return new ModelAndView("login/login", "error", error);
     }
 
     @RequestMapping("/restablecer-accesos")
