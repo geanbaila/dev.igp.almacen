@@ -29,16 +29,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
             .csrf().disable()
             .authorizeRequests()
-                .antMatchers("/").hasRole("ADMIN")
+                //.antMatchers("/").hasRole("ADMIN")
                 .antMatchers("/salida").hasRole("ADMIN")
                 .antMatchers("/almacen").hasRole("ADMIN")
                 .antMatchers("/login*").permitAll()
+                .antMatchers("/assets/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                      .loginPage("/login")//url que muestra el view de login
                      .permitAll()
-                     .failureUrl("/login/login?error=true") //handle que recibe el error
+                     .failureUrl("/login?error=1") //handle que recibe el error
                      .usernameParameter("usuario")
                      .passwordParameter("clave");
     }

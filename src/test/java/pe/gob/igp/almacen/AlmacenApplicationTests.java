@@ -14,6 +14,7 @@ class AlmacenApplicationTests {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
 	@Test
 	void contextLoads() {
 		String clave = "secret";

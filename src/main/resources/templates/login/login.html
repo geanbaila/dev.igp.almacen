@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:thymeleaf="https://thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 	<!--begin::Head-->
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <head>
@@ -48,7 +48,7 @@
 					<div class="d-flex flex-row-fluid flex-column justify-content-between">
 						<!--begin: Aside header-->
 						<a href="#" class="flex-column-auto mt-5 pb-lg-0 pb-10">
-							<img src="/assets/img/logo.png" class="max-h-70px" alt="" />
+							<img th:src="@{assets/img/logo.png}" class="max-h-70px" alt="" />
 						</a>
 						<!--end: Aside header-->
 						<!--begin: Aside content-->
@@ -77,10 +77,10 @@
 							<!--begin::Form-->
 							<form class="form" th:action="@{/login}" method="POST" novalidate="novalidate" id="kt_login_signin_form">
 								<div class="form-group">
-									<input class="form-control form-control-solid h-auto py-5 px-6" type="text" placeholder="usaurio.." name="usuario" autocomplete="off" />
+									<input class="form-control form-control-solid h-auto py-5 px-6" type="text" placeholder="usaurio.." name="usuario" value="gean" autocomplete="off" />
 								</div>
 								<div class="form-group">
-									<input class="form-control form-control-solid h-auto py-5 px-6" type="password" placeholder="clave.." name="clave" autocomplete="off" />
+									<input class="form-control form-control-solid h-auto py-5 px-6" type="password" placeholder="clave.." name="clave" value="secret" autocomplete="off" />
 								</div>
 								<!--begin::Action-->
 								<div class="form-group d-flex flex-wrap justify-content-between align-items-center">
@@ -90,11 +90,11 @@
 								</div>
 								<!--end::Action-->
 
-								<%if (request.getAttribute("error")!= null && Boolean.parseBoolean(request.getAttribute("error").toString())) { %>
+								<div th:if="${error}!=0">
 									<div class="alert alert-danger" role="alert">
 										Acceso denegado
 									</div>
-								<% }%>
+								</div>
 							</form>
 							<!--end::Form-->
 						</div>
