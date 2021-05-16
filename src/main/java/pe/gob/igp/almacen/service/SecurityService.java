@@ -25,14 +25,11 @@ public class SecurityService implements UserDetailsService{
     Logger logger = LoggerFactory.getLogger(SecurityService.class);
 
     @Override
-    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-        UsuarioEntity usuario = usuarioRepository.findUser(nombre);
-        logger.info("UsuarioEntity:"+usuario.toString());
-
+    public UserDetails loadUserByUsername(String usuario) throws UsernameNotFoundException {
+        UsuarioEntity usuarioeEntity = usuarioRepository.findUsuario(usuario);
         List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("ADMIN"));
-        UserDetails userDetails = new User(usuario.getUsuario(), "{noop}"+usuario.getClave(), roles);
-        logger.info("UserDetails:"+userDetails.toString());
+        roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        UserDetails userDetails = new User(usuarioeEntity.getUsuario(), usuarioeEntity.getClave(), roles);
         return userDetails; 
     }
 

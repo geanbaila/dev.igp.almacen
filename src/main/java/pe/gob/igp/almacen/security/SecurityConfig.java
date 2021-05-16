@@ -21,8 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(securityService).passwordEncoder(codificador);
-        auth.userDetailsService(securityService);
+        auth.userDetailsService(securityService).passwordEncoder(codificador);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .formLogin()
                      .loginPage("/login")//url que muestra el view de login
                      .permitAll()
-                     .failureUrl("/login?error=true") //handle que recibe el error
+                     .failureUrl("/login/login?error=true") //handle que recibe el error
                      .usernameParameter("usuario")
                      .passwordParameter("clave");
     }

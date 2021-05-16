@@ -7,10 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 
 @Entity
 @Table(name="usuario")
@@ -27,20 +24,9 @@ public class UsuarioEntity {
     private String clave;
 
     @Column
-    private Integer rol;
-
-    @Column
     private String bestado;
 
     public UsuarioEntity() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getUsuario() {
@@ -59,14 +45,6 @@ public class UsuarioEntity {
         this.clave = clave;
     }
 
-    public Integer getRol() {
-        return rol;
-    }
-
-    public void setRol(Integer rol) {
-        this.rol = rol;
-    }
-
     public String getBestado() {
         return bestado;
     }
@@ -74,6 +52,8 @@ public class UsuarioEntity {
     public void setBestado(String bestado) {
         this.bestado = bestado;
     }
+
+    
 
     
 }

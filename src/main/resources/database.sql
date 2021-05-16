@@ -165,15 +165,16 @@ CREATE TABLE IF NOT EXISTS `almacen`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `rol_usuario_id` INT NOT NULL,
   `usuario` VARCHAR(45) NULL,
-  `clave` VARCHAR(45) NULL,
+  `clave` VARCHAR(100) NULL,
   `bestado` CHAR(1) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_usuario_rol_usuario1_idx` (`rol_usuario_id` ASC) ,
-  CONSTRAINT `fk_usuario_rol_usuario1`
-    FOREIGN KEY (`rol_usuario_id`)
-    REFERENCES `almacen`.`rol_usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`usuario`)
+  -- ,INDEX `fk_usuario_rol_usuario1_idx` (`rol_usuario_id` ASC) ,
+  -- CONSTRAINT `fk_usuario_rol_usuario1`
+  --   FOREIGN KEY (`rol_usuario_id`)
+  --   REFERENCES `almacen`.`rol_usuario` (`id`)
+    -- ON DELETE NO ACTION
+    -- ON UPDATE NO ACTION
+    )
 ENGINE = InnoDB;
 
 
@@ -198,7 +199,8 @@ CREATE TABLE IF NOT EXISTS `almacen`.`orden` (
   `accesorio` VARCHAR(45) NULL,
   `observacion` VARCHAR(45) NULL,
   `fecha_salida` DATETIME NULL,
-  `usuario_id` INT NOT NULL,
+  -- `usuario_id` INT NOT NULL,
+  `usuario_id` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_orden_tipo_orden_idx` (`tipo_orden_id` ASC) ,
   INDEX `fk_orden_motivo1_idx` (`motivo_id` ASC) ,
@@ -227,7 +229,8 @@ CREATE TABLE IF NOT EXISTS `almacen`.`orden` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `almacen`.`usuario` (`id`)
+    -- REFERENCES `almacen`.`usuario` (`id`)
+    REFERENCES `almacen`.`usuario` (`usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
