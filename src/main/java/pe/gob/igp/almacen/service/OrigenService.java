@@ -17,4 +17,8 @@ public class OrigenService {
     public List<OrigenEntity> getOrigen(){
         return origenRepository.findAll();
     }
+
+    public OrigenEntity findById(Integer origenId){
+        return origenRepository.getOne(origenId);
+    }
 }

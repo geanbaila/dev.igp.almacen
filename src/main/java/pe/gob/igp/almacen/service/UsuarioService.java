@@ -13,5 +13,8 @@ public class UsuarioService{
     @Autowired
     private UsuarioRepository usuarioRepository;
     
+    public UsuarioEntity findById(Integer usuarioId){
+        return usuarioRepository.getOne(usuarioId);
+    }
     
 }

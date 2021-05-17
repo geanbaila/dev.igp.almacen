@@ -17,4 +17,8 @@ public class MotivoService {
     public List<MotivoEntity> getMotivo(){
         return motivoRepository.findAll();
     }
+
+    public MotivoEntity findById(Integer motivoId){
+        return motivoRepository.getOne(motivoId);
+    }
 }

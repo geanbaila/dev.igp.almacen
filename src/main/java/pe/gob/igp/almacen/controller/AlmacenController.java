@@ -177,5 +177,7 @@ public class AlmacenController {
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
+
+
     //, produces = MediaType.APPLICATION_JSON_VALUE
 }

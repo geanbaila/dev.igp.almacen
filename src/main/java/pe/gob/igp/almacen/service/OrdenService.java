@@ -22,5 +22,9 @@ public class OrdenService {
        return ordenRepository.getOne(ordenId);
    }
 
+   public void save(OrdenEntity orden){
+       ordenRepository.save(orden);
+   }
+
 
 }

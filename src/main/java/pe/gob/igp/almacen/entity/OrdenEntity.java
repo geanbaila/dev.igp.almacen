@@ -43,28 +43,28 @@ public class OrdenEntity {
     @Column
     private String destino;
 
-    @Column
+    @Column(name="fecha_salida_prevista")
     private Date fechaSalidaPrevista;
 
-    @Column
+    @Column(name="fecha_retorno_prevista")
     private Date fechaRetornoPrevista;
 
     @Column
     private String comisionado;
 
-    @Column
+    @Column(name="comisionado_dni")
     private String comisionadoDni;
 
-    @Column
+    @Column(name="comisionado_area")
     private String comisionadoArea;
 
     @Column
     private String autoriza;
 
-    @Column
+    @Column(name="autoriza_dni")
     private String autorizaDni;
 
-    @Column
+    @Column(name="autoriza_area")
     private String autorizaArea;
 
     @Column
@@ -73,10 +73,34 @@ public class OrdenEntity {
     @Column
     private String observacion;
 
-    @Column
-    private Date fechaSalida;
+    @Column(name = "numero_orden")
+    private String numeroOrden;
 
     public OrdenEntity() {
+    }
+
+    public OrdenEntity(TipoOrdenEntity tipoOrden, MotivoEntity motivo, EstadoOrdenEntity estadoOrden,
+            OrigenEntity origen, UsuarioEntity usuario, String destino, Date fechaSalidaPrevista,
+            Date fechaRetornoPrevista, String comisionado, String comisionadoDni, String comisionadoArea,
+            String autoriza, String autorizaDni, String autorizaArea, String accesorio, String observacion,
+            String numeroOrden) {
+        this.tipoOrden = tipoOrden;
+        this.motivo = motivo;
+        this.estadoOrden = estadoOrden;
+        this.origen = origen;
+        this.usuario = usuario;
+        this.destino = destino;
+        this.fechaSalidaPrevista = fechaSalidaPrevista;
+        this.fechaRetornoPrevista = fechaRetornoPrevista;
+        this.comisionado = comisionado;
+        this.comisionadoDni = comisionadoDni;
+        this.comisionadoArea = comisionadoArea;
+        this.autoriza = autoriza;
+        this.autorizaDni = autorizaDni;
+        this.autorizaArea = autorizaArea;
+        this.accesorio = accesorio;
+        this.observacion = observacion;
+        this.numeroOrden = numeroOrden;
     }
 
     public Integer getId() {
@@ -215,14 +239,15 @@ public class OrdenEntity {
         this.observacion = observacion;
     }
 
-    public Date getFechaSalida() {
-        return fechaSalida;
+    public String getNumeroOrden() {
+        return numeroOrden;
     }
 
-    public void setFechaSalida(Date fechaSalida) {
-        this.fechaSalida = fechaSalida;
+    public void setNumeroOrden(String numeroOrden) {
+        this.numeroOrden = numeroOrden;
     }
 
+     
     
 
     

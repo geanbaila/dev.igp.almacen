@@ -108,13 +108,13 @@
                         <div class="d-flex flex-column-fluid">
                             <!--begin::Container-->
                             <div class="container-fluid">
-                                <form class="row g-3">
+                                <form class="row g-3" method="POST" th:action="@{/salida/guardar}">
                                     <div class="col-md-3">
                                         <label for="inputEmail4" class="form-label">
                                             <span class="text-danger">*</span>
                                             Motivo
                                         </label>
-                                        <select class="form-select">
+                                        <select name="motivo_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="motivo : ${data.prg_motivo}" th:remove="tag">
                                             <option th:value="${motivo.id}" th:text="${motivo.nombre}"></option>
@@ -124,7 +124,7 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label">
                                             <span class="text-danger">*</span> Origen</label>
-                                        <select class="form-select">
+                                        <select name="origen_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="origen : ${data.prg_origen}" th:remove="tag">
                                                 <option th:value="${origen.id}" th:text="${origen.nombre}"></option>
@@ -132,20 +132,20 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="inputPassword4" class="form-label"><span
-                                                class="text-danger">*</span> Recibe</label>
-                                        <select class="form-select">
+                                        <label for="inputPassword4" class="form-label">
+                                        <span class="text-danger">*</span> Recibe</label>
+                                        <select name="asignado_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <option>GEAN CARLOS BAILA LAURENTE </option>
+                                            <option value="1">GEAN CARLOS BAILA LAURENTE </option>
                                             
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label"><span
                                                 class="text-danger">*</span> Recepciona</label>
-                                        <select class="form-select">
+                                        <select name="comisionado_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <option>GEAN CARLOS BAILA LAURENTE</option>
+                                            <option value="1">GEAN CARLOS BAILA LAURENTE</option>
 
                                         </select>
                                     </div>
@@ -153,28 +153,29 @@
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label"><span class="text-danger">*</span>
                                             Destino</label>
-                                        <textarea type="text" class="form-control" rows="2"></textarea>
+                                        <textarea type="text" class="form-control" rows="2" name="destino"></textarea>
                                         <code>Máximo de caracteres permitidos 0/500.</code>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">
                                         <label for="inputCity" class="form-label">Buscar bienes </label>
-                                        <input type="text" class="form-control" id="autocomplete-ajax" onkeyup="buscarBienes(this.value)"/>
+                                        <input type="text" class="form-control" id="search-box" onkeyup="buscarBienes(this.value)" value="7408" />
                                         <code>Buscar bienes <i data-feather="search"></i></code>
+                                        <div id="suggesstion-box">aquí las sugerencias</div>
                                     </div>
                                     <div class="col-3s">
                                         <label for="inputAddress2" class="form-label"><span class="text-danger">*</span>
                                             Fecha de salida</label>
-                                        <input type="text" class="form-control date">
+                                        <input type="text" name="fecha_salida_prevista" class="form-control date" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputCity" class="form-label">Fecha de retorno</label>
-                                        <input type="text" class="form-control date">
+                                        <input type="text" name="fecha_retorno_prevista" class="form-control date" />
                                         <code>Fecha prevista de retorno.</code>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="inputCity" class="form-label">Orden de salida</label>
-                                        <input type="text" class="form-control" disabled value="2021-0001">
+                                        <label for="inputCity" class="form-label">Número de Orden</label>
+                                        <input type="text" name="numero_orden" class="form-control" value="2021-0001" disabled />
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-12">
@@ -194,84 +195,64 @@
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>740805000123</td>
-                                                    <td>014418</td>
-                                                    <td>COMPUTADORA PERSONAL PORTATIL</td>
-                                                    <td>HEWLETT PACKARD</td>
-                                                    <td>PROBOOK 7</td>
-                                                    <td>CNU12546W5</td>
-                                                    <td>NEGRO</td>
-                                                    <td>R</td>
-                                                    <td><input type="checkbox" checked></td>
-                                                    <td><a><i data-feather="search"></i></a><a><i data-feather="trash"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                        <td>740805000123</td>
-                                                        <td>014418</td>
-                                                        <td>COMPUTADORA PERSONAL PORTATIL</td>
-                                                        <td>HEWLETT PACKARD</td>
-                                                        <td>PROBOOK 7</td>
-                                                        <td>CNU12546W5</td>
-                                                        <td>NEGRO</td>
-                                                        <td>R</td>
-                                                        <td><input type="checkbox" checked></td>
-                                                        <td><a><i data-feather="search"></i></a><a><i data-feather="trash"></i></a></td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                        <td>740805000123</td>
-                                                        <td>014418</td>
-                                                        <td>COMPUTADORA PERSONAL PORTATIL</td>
-                                                        <td>HEWLETT PACKARD</td>
-                                                        <td>PROBOOK 7</td>
-                                                        <td>CNU12546W5</td>
-                                                        <td>NEGRO</td>
-                                                        <td>R</td>
-                                                        <td><input type="checkbox" checked></td>
-                                                        <td><a><i data-feather="search"></i></a><a><i data-feather="trash"></i></a></td>
-                                                    
-                                                </tr>
+                                            <tbody id="itemadded">
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="col-6">
                                         <label for="inputAddress" class="form-label">Observaciones</label>
-                                        <textarea type="text" class="form-control" rows="3">ninguna</textarea>
+                                        <textarea type="text" name="observacion" class="form-control" rows="3">ninguna</textarea>
                                         <code>Máximo de caracteres permitidos 0/500.</code>
                                     </div>
                                     <div class="col-6">
                                         <label for="inputAddress" class="form-label">Accesorios</label>
-                                        <textarea type="text" class="form-control" rows="3">no aplica</textarea>
+                                        <textarea type="text" name="accesorio" class="form-control" rows="3">no aplica</textarea>
                                         <code>Máximo de caracteres permitidos 0/500.</code>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-12">
-                                        <a th:href="@{/orden-salida/listar}" class="btn btn-success">Generar O.Salida</a>
+                                        <button type="submit" class="btn btn-success">Generar O.Salida</button>
+                                        <a th:href="@{/salida}" class="btn btn-secondary">Cancelar</a>
                                     </div>
                                 </form>
 
                                 <div id="selction-ajax"></div>
+                                <style>
+                                    #item-list{float:left;list-style:none;margin-top:-3px;padding:0;width:190px;position: absolute;z-index: 999;}
+                                    #item-list li{padding: 10px; background: #f0f0f0; border-bottom: #bbb9b9 1px solid;}
+                                    #item-list li:hover{background:#ece3d2;cursor: pointer;}
+                                    #search-box{padding: 10px;border: #a8d4b1 1px solid;border-radius:4px;}
+                                </style>
                                 <script>
                                     function buscarBienes(codigoPatrimonial){
                                         $.ajax({
                                             url:'/items/'+codigoPatrimonial,
                                             type:'POST',
                                             success:function(result){
-                                                console.log(result);
+                                                $("#suggesstion-box").show();
+                                                $("#suggesstion-box").html(result);
+                                                $("#search-box").css("background","#FFF");
                                             }
-                                        })
+                                        });
+                                    }
+
+                                    function addItem(itemId){
+                                        $.ajax({
+                                            url:'/item/'+itemId,
+                                            type:'POST',
+                                            success: function(result){
+                                                $("#search-box").val(result.codigoPatrimonial);
+                                                $("#suggesstion-box").hide();
+                                                $("#itemadded").append(result.html);
+                                            }
+                                        });
+                                    }
+
+                                    function eliminar(element){
+                                        $(element).parent().parent().remove();
                                     }
                                 </script>
-                                <script type="text/javascript" th:src="@{/assets/js/jquery-1.8.2.min.js}"></script>
-                                <script type="text/javascript" th:src="@{/assets/js/jquery.mockjax.js}"></script>
-                                <script type="text/javascript" th:src="@{/assets/js/jquery.autocomplete.js}"></script>
-                                <script type="text/javascript" th:src="@{/assets/js/demo.js}"></script>
-
+                                
                             </div>
                             <!--end::Container-->
                         </div>

@@ -44,3 +44,7 @@ insert into personal(nombre, puesto_id) values
 insert into estado_item(nombre) values
 ('Disponible'),
 ('Prestado');
+
+insert into tipo_orden(nombre) values("Orden de salida"), ("Orden de traslado");
+
+insert into estado_orden(nombre) values("Pendiente de firmas"), ("Firmado"), ("Despachado");
