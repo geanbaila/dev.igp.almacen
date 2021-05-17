@@ -124,17 +124,15 @@
                                                     <th scope="col" colspan="3">Acciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody th:each="orden : ${prg_orden}">
+                                            <tbody th:each="orden : ${eanOrden}">
                                                 <tr>
-                                                    <th scope="row" th:text="${orden.id}"></th>
                                                     <td th:text="${orden.id}"></td>
-                                                    <td th:text="${orden.id}"></td>
-                                                    <td th:text="${orden.id}"></td>
-                                                    <td th:text="${orden.id}"></td>
-                                                    <td><span
-                                                        class="label label-inline label-light-primary font-weight-bold">
-                                                        Aún no firmas
-                                                    </span></td>
+                                                    <td th:text="${orden.motivo.nombre}"></td>
+                                                    <td th:text="${orden.recibe.nombre}"></td>
+                                                    <td th:text="${orden.recepciona.nombre}"></td>
+                                                    <td th:text="${orden.fechaSalidaPrevista}"></td>
+                                                    <td><span th:text="${orden.estadoOrden.nombre}"
+                                                        class="label label-inline label-light-primary font-weight-bold"></span></td>
                                                     <td><a class="btn btn-bg-light btn-xs">Firmar</a></td>
                                                     <td><a onclick="verOrdenSalida(1)"><i data-feather="eye"></i></a></td>
                                                     <td><a th:href="@{/salida/editar/{orden_id} (orden_id=${orden.id})}" ><i data-feather="edit"></i></a></td>

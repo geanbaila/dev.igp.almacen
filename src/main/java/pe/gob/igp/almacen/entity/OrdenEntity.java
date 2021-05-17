@@ -49,8 +49,9 @@ public class OrdenEntity {
     @Column(name="fecha_retorno_prevista")
     private Date fechaRetornoPrevista;
 
-    @Column
-    private String comisionado;
+    @OneToOne
+    @JoinColumn(name = "recibe_id", referencedColumnName = "id")
+    private PersonalEntity recibe;
 
     @Column(name="comisionado_dni")
     private String comisionadoDni;
@@ -58,8 +59,9 @@ public class OrdenEntity {
     @Column(name="comisionado_area")
     private String comisionadoArea;
 
-    @Column
-    private String autoriza;
+    @OneToOne
+    @JoinColumn(name="recepciona_id", referencedColumnName="id")
+    private PersonalEntity recepciona;
 
     @Column(name="autoriza_dni")
     private String autorizaDni;
@@ -81,8 +83,8 @@ public class OrdenEntity {
 
     public OrdenEntity(TipoOrdenEntity tipoOrden, MotivoEntity motivo, EstadoOrdenEntity estadoOrden,
             OrigenEntity origen, UsuarioEntity usuario, String destino, Date fechaSalidaPrevista,
-            Date fechaRetornoPrevista, String comisionado, String comisionadoDni, String comisionadoArea,
-            String autoriza, String autorizaDni, String autorizaArea, String accesorio, String observacion,
+            Date fechaRetornoPrevista, PersonalEntity recibe, String comisionadoDni, String comisionadoArea,
+            PersonalEntity recepciona, String autorizaDni, String autorizaArea, String accesorio, String observacion,
             String numeroOrden) {
         this.tipoOrden = tipoOrden;
         this.motivo = motivo;
@@ -92,10 +94,10 @@ public class OrdenEntity {
         this.destino = destino;
         this.fechaSalidaPrevista = fechaSalidaPrevista;
         this.fechaRetornoPrevista = fechaRetornoPrevista;
-        this.comisionado = comisionado;
+        this.recibe = recibe;
         this.comisionadoDni = comisionadoDni;
         this.comisionadoArea = comisionadoArea;
-        this.autoriza = autoriza;
+        this.recepciona = recepciona;
         this.autorizaDni = autorizaDni;
         this.autorizaArea = autorizaArea;
         this.accesorio = accesorio;
@@ -175,12 +177,12 @@ public class OrdenEntity {
         this.fechaRetornoPrevista = fechaRetornoPrevista;
     }
 
-    public String getComisionado() {
-        return comisionado;
+    public PersonalEntity getRecibe() {
+        return recibe;
     }
 
-    public void setComisionado(String comisionado) {
-        this.comisionado = comisionado;
+    public void setRecibe(PersonalEntity recibe) {
+        this.recibe = recibe;
     }
 
     public String getComisionadoDni() {
@@ -199,12 +201,12 @@ public class OrdenEntity {
         this.comisionadoArea = comisionadoArea;
     }
 
-    public String getAutoriza() {
-        return autoriza;
+    public PersonalEntity getRecepciona() {
+        return recepciona;
     }
 
-    public void setAutoriza(String autoriza) {
-        this.autoriza = autoriza;
+    public void setRecepciona(PersonalEntity recepciona) {
+        this.recepciona = recepciona;
     }
 
     public String getAutorizaDni() {
@@ -246,9 +248,6 @@ public class OrdenEntity {
     public void setNumeroOrden(String numeroOrden) {
         this.numeroOrden = numeroOrden;
     }
-
-     
-    
 
     
 }

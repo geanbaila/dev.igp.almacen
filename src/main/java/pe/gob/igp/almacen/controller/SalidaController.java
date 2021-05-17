@@ -75,9 +75,9 @@ public class SalidaController {
     
     @GetMapping({"","listar"})
     public ModelAndView home(){
-        List<OrdenEntity> prg_orden = ordenService.getOrden();
-        logger.debug("Listando las órdenes de salida:"+prg_orden.toString());
-        return new ModelAndView("salida/listar", "prg_orden", prg_orden);
+        List<OrdenEntity> eanOrden = ordenService.getOrden();
+        logger.debug("Listando las órdenes de salida:"+eanOrden.toString());
+        return new ModelAndView("salida/listar", "eanOrden", eanOrden);
     }
 
     @GetMapping("nuevo")
@@ -88,27 +88,40 @@ public class SalidaController {
         List<ModeloEntity> prg_modelo = modeloService.getModelo();
         List<PersonalEntity> prg_personal = personalService.getPersonal();
         Map<String,List> data = new HashMap<>();
-        data.put("prg_motivo", prg_motivo);
-        data.put("prg_origen", prg_origen);
-        data.put("prg_marca", prg_marca);
-        data.put("prg_modelo", prg_modelo);
-        data.put("prg_personal", prg_personal);
+        data.put("eanMotivo", prg_motivo);
+        data.put("eanOrigen", prg_origen);
+        data.put("eanMarca", prg_marca);
+        data.put("eanModelo", prg_modelo);
+        data.put("eanPersonal", prg_personal);
         return new ModelAndView("salida/nuevo", "data", data);
     }
 
     @GetMapping("editar/{id}")
-    public String listar(@PathVariable("id") int id, Model model){
-        model.addAttribute("id", id);
-        model.addAttribute("autor", "gean");
-        return "salida/editar";
+    public ModelAndView listar(@PathVariable("id") int id, Model model){
+        List<MotivoEntity> prg_motivo = motivoService.getMotivo();
+        List<OrigenEntity> prg_origen = origenService.getOrigen();
+        List<MarcaEntity> prg_marca = marcaService.getMarca();
+        List<ModeloEntity> prg_modelo = modeloService.getModelo();
+        List<PersonalEntity> prg_personal = personalService.getPersonal();
+        Map<String,List> data = new HashMap<>();
+        data.put("eanMotivo", prg_motivo);
+        data.put("eanOrigen", prg_origen);
+        data.put("eanMarca", prg_marca);
+        data.put("eanModelo", prg_modelo);
+        data.put("eanPersonal", prg_personal);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("data", data);
+        modelAndView.setViewName("salida/editar");
+        return modelAndView;
     }
 
     @RequestMapping("guardar")
     public String guardar(
         @RequestParam(name = "motivo_id", required = false) Integer motivoId, 
         @RequestParam(name = "origen_id", required = false) Integer origenId, 
-        @RequestParam(name = "asignado_id", required = false) Integer asignadoId, 
-        @RequestParam(name = "comisionado_id", required = false) Integer comisionadoId,
+        @RequestParam(name = "recibe_id", required = false) Integer recibeId, 
+        @RequestParam(name = "recepciona_id", required = false) Integer recepcionaId,
         @RequestParam(name = "destino", required = false) String destino,
         @RequestParam(name = "fecha_salida_prevista", required = false) Date fechaSalidaPrevista,
         @RequestParam(name = "fecha_retorno_prevista", required = false) Date fechaRetornoPrevista,
@@ -123,7 +136,7 @@ public class SalidaController {
         String comisionadoArea = "";
         String autorizaDni = "";
         String autorizaArea = "";
-        String autoriza = "";
+        
         int tipoOrdenId = 1;
         int usuarioId = 1;
         int estadoId = 1;
@@ -132,8 +145,8 @@ public class SalidaController {
         TipoOrdenEntity tipoOrden = tipoOrdenService.findById(tipoOrdenId);
         UsuarioEntity usuario = usuarioService.findById(usuarioId);
         EstadoOrdenEntity estadoOrden = estadoOrdenService.findById(estadoId);
-        String comisionado = personalService.findById(comisionadoId).getNombre();
- 
+        PersonalEntity recibe = personalService.findById(recibeId);
+        PersonalEntity recepciona = personalService.findById(recepcionaId);
 
         OrdenEntity ordenEntity = new OrdenEntity(
             tipoOrden,
@@ -144,10 +157,10 @@ public class SalidaController {
             destino,
             fechaSalidaPrevista,
             fechaRetornoPrevista,
-            comisionado,
+            recepciona,
             comisionadoDni,
             comisionadoArea,
-            autoriza,
+            recibe,
             autorizaDni,
             autorizaArea,
             accesorio,

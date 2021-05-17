@@ -116,7 +116,7 @@
                                         </label>
                                         <select name="motivo_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <div th:each="motivo : ${data.prg_motivo}" th:remove="tag">
+                                            <div th:each="motivo : ${data.eanMotivo}" th:remove="tag">
                                             <option th:value="${motivo.id}" th:text="${motivo.nombre}"></option>
                                             </div>
                                         </select>
@@ -126,7 +126,7 @@
                                             <span class="text-danger">*</span> Origen</label>
                                         <select name="origen_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <div th:each="origen : ${data.prg_origen}" th:remove="tag">
+                                            <div th:each="origen : ${data.eanOrigen}" th:remove="tag">
                                                 <option th:value="${origen.id}" th:text="${origen.nombre}"></option>
                                             </div>
                                         </select>
@@ -134,19 +134,21 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label">
                                         <span class="text-danger">*</span> Recibe</label>
-                                        <select name="asignado_id" class="form-select">
+                                        <select name="recibe_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <option value="1">GEAN CARLOS BAILA LAURENTE </option>
-                                            
+                                            <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
+                                                <option th:value="${personal.id}" th:text="${personal.nombre}"></option>
+                                            </div>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label"><span
                                                 class="text-danger">*</span> Recepciona</label>
-                                        <select name="comisionado_id" class="form-select">
+                                        <select name="recepciona_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <option value="1">GEAN CARLOS BAILA LAURENTE</option>
-
+                                            <div th:each="personal : ${data.eanPersonal}">
+                                                <option th:value="${personal.id}" th:text="${personal.nombre}"></option>
+                                            </div>
                                         </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
