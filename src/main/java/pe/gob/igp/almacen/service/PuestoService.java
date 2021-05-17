@@ -1,5 +1,7 @@
 package pe.gob.igp.almacen.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class PuestoService {
 
     public PuestoEntity findById(Integer puestoId){
         return puestoRepository.getOne(puestoId);
+    }
+
+    public List<PuestoEntity> getPuesto(){
+        return puestoRepository.findAll();
     }
 }

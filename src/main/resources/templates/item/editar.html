@@ -110,45 +110,75 @@
                             <!--begin::Container-->
                             <div class="container-fluid">
                                 <form class="row g-3" method="POST" th:action="@{/almacen/actualizar}">
-                                    <input type="hidden" name="item_id" th:value="${item.id}" />
+                                    <input type="hidden" name="item_id" th:value="${item.id}">
                                     <div class="col-md-3">
                                         <label for="codigo_patrimonial" class="form-label">C. patrimonial</label>
-                                        <input type="text" class="form-control" name="codigo_patrimonial" th:value="${item.codigoPatrimonial}" />
+                                        <input type="text" class="form-control" name="codigo_patrimonial" th:value="${item.codigoPatrimonial}"/>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="cocdigo_inventario" class="form-label"><span class="text-danger">*</span>
                                             C.Inventario</label>
-                                        <input type="text" class="form-control" name="cocdigo_inventario"  th:value="${item.codigoInventario}" />
+                                        <input type="text" class="form-control" name="codigo_inventario" maxlength="8" th:value="${item.codigoInventario}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="codigo_ambiente" class="form-label"><span class="text-danger">*</span>
                                             C.Ambiente</label>
-                                        <input type="text" class="form-control" name="codigo_ambiente" th:value="${item.codigoAmbiente}" />
+                                        <input type="text" class="form-control" name="codigo_ambiente" th:value="${item.codigoAmbiente}"/>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="estado" class="form-label"><span class="text-danger">*</span>
                                             Estado</label>
-                                        <input type="text" class="form-control" name="estado" th:value="${item.estado.id}" />
+                                        <select class="form-control" name="estado" >
+                                        <option value="0"> -- seleccione -- </option>
+                                        <div th:each="estado : ${data.endEstadoItem}" th:remove="tag">
+                                            <div th:if="${estado.id}==${item.estadoItem.id}" th:remove="tag">
+                                                <option th:value="${estado.id}" th:text="${estado.nombre}" selected></option>
+                                            </div>
+                                            <div th:unless="${estado.id}==${item.estadoItem.id}" th:remove="tag">
+                                                <option th:value="${estado.id}" th:text="${estado.nombre}"></option>
+                                            </div>
+                                        </div>
+                                        </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-12">
                                         <label for="denominacion" class="form-label"><span class="text-danger">*</span>
                                             Denominación</label>
-                                        <textarea type="text" class="form-control" rows="2" name="denominacion"><div th:text="${item.denominacion}" th:remove="tag"></div></textarea>
+                                        <textarea type="text" class="form-control" rows="2" name="denominacion" th:text="${item.denominacion}"></textarea>
                                         <code>Máximo de caracteres permitidos 0/100.</code>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">
                                         <label for="marca" class="form-label">Marca</label>
-                                        <input type="text" class="form-control" name="marca" th:value="${item.marca.nombre}" />
+                                        <select class="form-control" name="marca" >
+                                            <option value="0"> -- seleccione -- </option>
+                                            <div th:each="marca : ${data.eanMarca}" th:remove="tag">
+                                                <div th:if="${marca.id}==${item.marca.id}">
+                                                    <option th:value="${marca.id}" th:text="${marca.nombre}" selected></option>
+                                                </div>
+                                                <div th:unless="${marca.id}==${item.marca.id}">
+                                                    <option th:value="${marca.id}" th:text="${marca.nombre}"></option>
+                                                </div>
+                                            </div>
+                                        </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="modelo" class="form-label">Modelo</label>
-                                        <input type="text" class="form-control" name="modelo" th:value="${item.modelo.nombre}" />
+                                        <select class="form-control" name="modelo" >
+                                            <option value="0"> -- seleccione -- </option>
+                                            <div th:each="modelo : ${data.eanModelo}" th:remove="tag">
+                                                <div th:if="${modelo.id}==${item.modelo.id}">
+                                                    <option th:value="${modelo.id}" th:text="${modelo.nombre}" selected></option>
+                                                </div>
+                                                <div th:unless="${modelo.id}==${item.modelo.id}">
+                                                    <option th:value="${modelo.id}" th:text="${modelo.nombre}"></option>
+                                                </div>
+                                            </div>
+                                        </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="serie" class="form-label">Serie</label>
-                                        <input type="text" class="form-control" name="serie" th:value="${item.serie}" />
+                                        <input type="text" class="form-control" name="serie" th:value="${item.serie}"/>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="color" class="form-label">Color</label>
@@ -157,11 +187,22 @@
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">
                                         <label for="asignado" class="form-label">Asignado a</label>
-                                        <input type="text" class="form-control" name="asignado" />
+                                        <select class="form-control" name="asignado" >
+                                            <option value="0"> -- seleccione -- </option>
+                                            <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
+                                                <div th:if="${personal.puesto.id}==${item.puesto.id}">
+                                                    <option th:value="${personal.id}" th:text="${personal.nombre}+ ' - ' +${personal.puesto.nombre}" selected></option>
+                                                </div>
+                                                <div th:unless="${personal.puesto.id}==${item.puesto.id}">
+                                                    <option th:value="${personal.id}" th:text="${personal.nombre}+ ' - ' +${personal.puesto.nombre}"></option>
+                                                </div>
+                                            </div>
+                                        </select>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-success">Guardar</button>
+                                        <a th:href="@{/almacen}" class="btn btn-secondary">Cancelar</a>
                                     </div>
                                 </form>
 

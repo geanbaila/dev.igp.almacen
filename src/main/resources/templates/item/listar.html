@@ -129,30 +129,44 @@
                                                     <th scope="col" colspan="3">Acciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody th:each="item : ${prg_item}">
-                                                <tr>
-                                                    <td scope="row" th:text="${item.id}"></td>
-                                                    <td th:text="${item.codigoPatrimonial}"></td>
-                                                    <td th:text="${item.denominacion}"></td>
-                                                    <td th:text="${item.marca.nombre}"></td>
-                                                    <td th:text="${item.modelo.nombre}"></td>
-                                                    <td><span
-                                                        class="label label-inline label-light-primary font-weight-bold">
-                                                        <div th:text="${item.serie}" th:remove="tag"></div>
-                                                    </span></td>
-                                                    <td><span
-                                                        class="label label-inline label-light-success font-weight-bold">
-                                                        <div th:text="${item.codigoAmbiente}" th:remove="tag"></div>
-                                                    </span></td>
-                                                    <td><a onclick="verOrdenSalida(1)"><i data-feather="eye"></i></a></td>
-                                                    <td><a th:href="@{/almacen/editar/{item_id} (item_id = ${item.id})} "><i data-feather="edit"></i></a></td>
-                                                    <td><a th:href="@{/almacen/eliminar/{item_id} (item_id = ${item.id})}"><i data-feather="trash"></i></a></td>
-                                                    
-                                                    
-                                                </tr>
-                                                
+                                            <tbody>
+                                                <div th:each="item,iterador : ${prg_item}">
+                                                    <div th:if="${iterador.index}%2==0">
+                                                        <tr scope="row" >
+                                                    </div>
+                                                    <div th:unless="${iterador.index}%2==0">
+                                                        <tr>
+                                                    </div>
+                                                        <td th:text="${item.id}"></td>
+                                                        <td th:text="${item.codigoPatrimonial}"></td>
+                                                        <td th:text="${item.denominacion}"></td>
+                                                        <td th:text="${item.marca.nombre}"></td>
+                                                        <td th:text="${item.modelo.nombre}"></td>
+                                                        <td th:text="${item.serie}"></td>
+                                                        <td th:text="${item.codigoAmbiente}"></td>
+                                                        <td><a onclick="verOrdenSalida(1)"><i data-feather="eye"></i></a></td>
+                                                        <td><a th:href="@{/almacen/editar/{item_id} (item_id = ${item.id})} "><i data-feather="edit"></i></a></td>
+                                                        <td><a th:onclick="@{eliminar({item_id},this) (item_id = ${item.id})}"><i data-feather="trash"></i></a></td>                                                    
+                                                    </tr>
+                                                </div>
                                             </tbody>
                                         </table>
+                                        <script>
+                                            function eliminar(id,element){
+                                                $(element).parent().parent().remove();
+                                                $.ajax({
+                                                    url:'/almacen/eliminar/'+id,
+                                                    type:'POST',
+                                                    dataType:'JSON',
+                                                    success:function(result){
+                                                        console.log(result);
+                                                    },
+                                                    
+                                                    
+                                                });
+                                                
+                                            };
+                                        </script>
                                     </div>
                                     
                                 </form>

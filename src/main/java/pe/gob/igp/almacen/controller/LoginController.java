@@ -15,4 +15,8 @@ public class LoginController {
         return new ModelAndView("login/login","error", error);
     }
   
+    @RequestMapping("/restablecer-accesos")
+    public String restablecerAccesos(){
+        return "login/restablecer";
+    }
 }

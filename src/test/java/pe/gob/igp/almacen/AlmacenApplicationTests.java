@@ -19,9 +19,6 @@ class AlmacenApplicationTests {
 	void contextLoads() {
 		String clave = "secret";
 		String claveEncriptada = encoder.encode(clave);
-		logger.warn("=====");
-		logger.warn("clave: "+clave);
-		logger.warn("claveEncriptada:"+claveEncriptada);
 		//$2a$10$dbAnQXcVvSdCBmAREoItCek3SPt3ey4Lz9/V3dMZ02QDS/M0QpD0q
 	}
 

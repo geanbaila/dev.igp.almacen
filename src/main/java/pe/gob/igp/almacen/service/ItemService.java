@@ -22,8 +22,17 @@ public class ItemService {
         return itemRepository.getOne(item_id);
     }
 
+    public List<ItemEntity> findLike(String codigoPatrimonial){
+        return itemRepository.findLike(codigoPatrimonial);
+
+    }
+
     public Integer save(ItemEntity item){
         return itemRepository.saveAndFlush(item).getId();
+    }
+
+    public void remove(Integer itemId){
+        itemRepository.deleteById(itemId);
     }
 
 }

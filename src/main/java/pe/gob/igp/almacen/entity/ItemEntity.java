@@ -105,11 +105,11 @@ public class ItemEntity {
         this.modelo = modelo;
     }
 
-    public EstadoItemEntity getEstado() {
+    public EstadoItemEntity getEstadoItem() {
         return estadoItem;
     }
 
-    public void setEstado(EstadoItemEntity estadoItem) {
+    public void setEstadoItem(EstadoItemEntity estadoItem) {
         this.estadoItem = estadoItem;
     }
 
@@ -168,7 +168,5 @@ public class ItemEntity {
     public void setColor(String color) {
         this.color = color;
     }
-
-    
 
 }

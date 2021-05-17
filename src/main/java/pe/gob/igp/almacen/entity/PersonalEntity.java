@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="origen")
-public class OrigenEntity {
+@Table(name = "personal")
+public class PersonalEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +20,12 @@ public class OrigenEntity {
     @Column
     private String nombre;
 
-    public OrigenEntity() {
+    @OneToOne
+    @JoinColumn(name = "puesto_id", referencedColumnName = "id")
+    private PuestoEntity puesto;
+
+    public PersonalEntity(){
+
     }
 
     public Integer getId() {
@@ -37,6 +44,13 @@ public class OrigenEntity {
         this.nombre = nombre;
     }
 
+    public PuestoEntity getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(PuestoEntity puesto) {
+        this.puesto = puesto;
+    }
+
     
 }
-

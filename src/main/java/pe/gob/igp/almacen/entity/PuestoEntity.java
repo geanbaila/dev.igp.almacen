@@ -1,5 +1,6 @@
 package pe.gob.igp.almacen.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,9 @@ public class PuestoEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column
+    private String nombre;
+
     public PuestoEntity() {
     }
 
@@ -25,4 +29,13 @@ public class PuestoEntity {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
 }

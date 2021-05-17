@@ -1,5 +1,7 @@
 package pe.gob.igp.almacen.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class MarcaService {
 
     public MarcaEntity findById(Integer marcaId){
         return marcaRepository.getOne(marcaId);
+    }
+
+    public List<MarcaEntity> getMarca(){
+        return marcaRepository.findAll();
     }
 
 

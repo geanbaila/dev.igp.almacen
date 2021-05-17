@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 
 @Entity
 @Table(name="usuario")
@@ -17,10 +16,10 @@ public class UsuarioEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column
+    @Column(unique = true)
     private String usuario;
 
-    @Column
+    @Column(length = 100)
     private String clave;
 
     @Column

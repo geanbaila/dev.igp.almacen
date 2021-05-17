@@ -7,7 +7,7 @@
             <div class="btn p-0 symbol" href="index.html" id="kt_quick_user_toggle">
                 <div class="symbol-label">
                     <img alt="Logo"
-                        th:src="@{assets/img/pelota.png}"
+                        th:src="@{/assets/img/pelota.png}"
                         class="h-75 align-self-end" />
                 </div>
             </div>
@@ -20,8 +20,8 @@
             <ul class="nav flex-column">
                 <!--begin::Item-->
                 <li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body"
-                    data-boundary="window" title="En este momento">
-                    <a href="#" class="nav-link btn btn-icon btn-lg btn-borderless active">
+                    data-boundary="window" title="Dashboard">
+                    <a th:href="@{/}" class="nav-link btn btn-icon btn-lg btn-borderless active">
                         <i data-feather="grid"></i>
                     </a>
                 </li>
