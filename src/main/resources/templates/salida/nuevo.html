@@ -181,6 +181,7 @@
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-12">
+                                        <input type="text" name="item_id" />
                                         <table class="table table-striped ">
                                             <thead class="thead-dark">
                                                 <tr>
@@ -225,36 +226,7 @@
                                     #item-list li:hover{background:#ece3d2;cursor: pointer;}
                                     #search-box{padding: 10px;border: #a8d4b1 1px solid;border-radius:4px;}
                                 </style>
-                                <script>
-                                    function buscarBienes(codigoPatrimonial){
-                                        $.ajax({
-                                            url:'/items/'+codigoPatrimonial,
-                                            type:'POST',
-                                            success:function(result){
-                                                $("#suggesstion-box").show();
-                                                $("#suggesstion-box").html(result);
-                                                $("#search-box").css("background","#FFF");
-                                            }
-                                        });
-                                    }
-
-                                    function addItem(itemId){
-                                        $.ajax({
-                                            url:'/item/'+itemId,
-                                            type:'POST',
-                                            success: function(result){
-                                                $("#search-box").val(result.codigoPatrimonial);
-                                                $("#suggesstion-box").hide();
-                                                $("#itemadded").append(result.html);
-                                            }
-                                        });
-                                    }
-
-                                    function eliminar(element){
-                                        $(element).parent().parent().remove();
-                                    }
-                                </script>
-                                
+                                <script th:src="@{/assets/js/sistema.js}"></script>
                             </div>
                             <!--end::Container-->
                         </div>

@@ -145,26 +145,22 @@
                                                         <td th:text="${item.serie}"></td>
                                                         <td th:text="${item.codigoAmbiente}"></td>
                                                         <td><a onclick="verOrdenSalida(1)"><i data-feather="eye"></i></a></td>
-                                                        <td><a th:href="@{/almacen/editar/{item_id} (item_id = ${item.id})} "><i data-feather="edit"></i></a></td>
-                                                        <td><a th:onclick="@{eliminar({item_id},this) (item_id = ${item.id})}"><i data-feather="trash"></i></a></td>                                                    
+                                                        <td><a th:href="@{/almacen/editar/{itemId} (itemId = ${item.id})} "><i data-feather="edit"></i></a></td>
+                                                        <td><a th:onclick="@{eliminarItem({itemId},this) (itemId = ${item.id})}"><i data-feather="trash"></i></a></td>                                                    
                                                     </tr>
                                                 </div>
                                             </tbody>
                                         </table>
                                         <script>
-                                            function eliminar(id,element){
-                                                $(element).parent().parent().remove();
+                                            function eliminarItem(itemId,element){
                                                 $.ajax({
-                                                    url:'/almacen/eliminar/'+id,
+                                                    url:'/almacen/eliminar/'+itemId,
                                                     type:'POST',
-                                                    dataType:'JSON',
+                                                    //dataType:'JSON',
                                                     success:function(result){
-                                                        console.log(result);
-                                                    },
-                                                    
-                                                    
+                                                        $(element).parent().parent().remove();
+                                                    }
                                                 });
-                                                
                                             };
                                         </script>
                                     </div>

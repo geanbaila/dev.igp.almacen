@@ -109,6 +109,7 @@
                             <!--begin::Container-->
                             <div class="container-fluid">
                                 <form class="row g-3" method="POST" th:action="@{/salida/actualizar}">
+                                    <input type="hidden" name="orden_id" th:value="${orden.id}">
                                     <div class="col-md-3">
                                         <label for="inputEmail4" class="form-label">
                                             <span class="text-danger">*</span>
@@ -117,7 +118,12 @@
                                         <select name="motivo_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="motivo : ${data.eanMotivo}" th:remove="tag">
-                                            <option th:value="${motivo.id}" th:text="${motivo.nombre}"></option>
+                                                <div th:if="${motivo.id}==${orden.motivo.id}" th:remove="tag">
+                                                    <option th:value="${motivo.id}" th:text="${motivo.nombre}" selected></option>
+                                                </div>
+                                                <div th:unless="${motivo.id}==${orden.motivo.id}" th:remove="tag">
+                                                    <option th:value="${motivo.id}" th:text="${motivo.nombre}"></option>
+                                                </div>
                                             </div>
                                         </select>
                                     </div>
@@ -127,7 +133,12 @@
                                         <select name="origen_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="origen : ${data.eanOrigen}" th:remove="tag">
-                                                <option th:value="${origen.id}" th:text="${origen.nombre}"></option>
+                                                <div th:if="${origen.id}==${orden.origen.id}" th:remove="tag">
+                                                    <option th:value="${origen.id}" th:text="${origen.nombre}" selected></option>
+                                                </div>
+                                                <div th:unless="${origen.id}==${orden.origen.id}" th:remove="tag">
+                                                    <option th:value="${origen.id}" th:text="${origen.nombre}"></option>
+                                                </div>
                                             </div>
                                         </select>
                                     </div>
@@ -137,7 +148,12 @@
                                         <select name="recibe_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
-                                                <option th:value="${personal.id}" th:text="${personal.nombre}"></option>
+                                                <div th:if="${personal.id}==${orden.recibe.id}" th:remove="tag"> 
+                                                    <option th:value="${personal.id}" th:text="${personal.nombre}" selected></option>
+                                                </div>
+                                                <div th:unless="${personal.id}==${orden.recibe.id}" th:remove="tag">
+                                                    <option th:value="${personal.id}" th:text="${personal.nombre}"></option>
+                                                </div>
                                             </div>
                                         </select>
                                     </div>
@@ -146,8 +162,13 @@
                                                 class="text-danger">*</span> Recepciona</label>
                                         <select name="recepciona_id" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
-                                            <div th:each="personal : ${data.eanPersonal}">
-                                                <option th:value="${personal.id}" th:text="${personal.nombre}"></option>
+                                            <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
+                                                <div th:if="${personal.id}==${orden.recepciona.id}" th:remove="tag">
+                                                    <option th:value="${personal.id}" th:text="${personal.nombre}" selected></option>
+                                                </div>
+                                                <div th:unless="${personal.id}==${orden.recepciona.id}" th:remove="tag">
+                                                    <option th:value="${personal.id}" th:text="${personal.nombre}"></option>
+                                                </div>
                                             </div>
                                         </select>
                                     </div>
@@ -155,7 +176,7 @@
                                     <div class="col-12">
                                         <label for="inputAddress" class="form-label"><span class="text-danger">*</span>
                                             Destino</label>
-                                        <textarea type="text" class="form-control" rows="2" name="destino"></textarea>
+                                        <textarea type="text" class="form-control" rows="2" name="destino" th:text="${orden.destino}"></textarea>
                                         <code>Máximo de caracteres permitidos 0/500.</code>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
@@ -168,19 +189,20 @@
                                     <div class="col-3s">
                                         <label for="inputAddress2" class="form-label"><span class="text-danger">*</span>
                                             Fecha de salida</label>
-                                        <input type="text" name="fecha_salida_prevista" class="form-control date" />
+                                        <input type="text" name="fecha_salida_prevista" class="form-control date" th:value="${orden.fechaSalidaPrevista}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputCity" class="form-label">Fecha de retorno</label>
-                                        <input type="text" name="fecha_retorno_prevista" class="form-control date" />
+                                        <input type="text" name="fecha_retorno_prevista" class="form-control date" th:value="${orden.fechaRetornoPrevista}"/>
                                         <code>Fecha prevista de retorno.</code>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputCity" class="form-label">Número de Orden</label>
-                                        <input type="text" name="numero_orden" class="form-control" value="2021-0001" disabled />
+                                        <input type="text" name="numero_orden" class="form-control" th:value="${orden.numeroOrden}" disabled />
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-12">
+                                        <input type="text" name="item_id" th:value="${itemIds}"/>
                                         <table class="table table-striped ">
                                             <thead class="thead-dark">
                                                 <tr>
@@ -198,17 +220,39 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="itemadded">
+                                                <div th:each="ordenDetalle,iterador : ${eanOrdenDetalle}" th:remove="tag">
+                                                    <tr>
+                                                        <td th:text="${iterador.count}"></td>
+                                                        <td th:text="${ordenDetalle.item.codigoPatrimonial}"></td>
+                                                        <td th:text="${ordenDetalle.item.codigoInventario}"></td>
+                                                        <td th:text="${ordenDetalle.item.denominacion}"></td>
+                                                        <td th:text="${ordenDetalle.item.marca.nombre}"></td>
+                                                        <td th:text="${ordenDetalle.item.modelo.nombre}"></td>
+                                                        <td th:text="${ordenDetalle.item.serie}"></td>
+                                                        <td th:text="${ordenDetalle.item.color}"></td>
+                                                        <td th:text="${ordenDetalle.item.estadoItem.nombre}"></td>
+                                                        <td>
+                                                            <div th:if="${ordenDetalle.retorna}" th:remove="tag">
+                                                                <input type="checkbox" checked>
+                                                            </div>
+                                                            <div th:unless="${ordenDetalle.retorna}" th:remove="tag">
+                                                                <input type="checkbox">
+                                                            </div>
+                                                        </td>
+                                                        <td><a th:onclick="@{eliminarItem({ordenDetalleId},{itemId},this) (itemId=${ordenDetalle.item.id}, ordenDetalleId=${ordenDetalle.id})}"><i data-feather="trash"></i></a></td>
+                                                    </tr>
+                                                </div>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="col-6">
                                         <label for="inputAddress" class="form-label">Observaciones</label>
-                                        <textarea type="text" name="observacion" class="form-control" rows="3">ninguna</textarea>
+                                        <textarea type="text" name="observacion" class="form-control" th:text=${orden.observacion} rows="3"></textarea>
                                         <code>Máximo de caracteres permitidos 0/500.</code>
                                     </div>
                                     <div class="col-6">
                                         <label for="inputAddress" class="form-label">Accesorios</label>
-                                        <textarea type="text" name="accesorio" class="form-control" rows="3">no aplica</textarea>
+                                        <textarea type="text" name="accesorio" class="form-control" th:text="${orden.accesorio}" rows="3"></textarea>
                                         <code>Máximo de caracteres permitidos 0/500.</code>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
@@ -225,36 +269,7 @@
                                     #item-list li:hover{background:#ece3d2;cursor: pointer;}
                                     #search-box{padding: 10px;border: #a8d4b1 1px solid;border-radius:4px;}
                                 </style>
-                                <script>
-                                    function buscarBienes(codigoPatrimonial){
-                                        $.ajax({
-                                            url:'/items/'+codigoPatrimonial,
-                                            type:'POST',
-                                            success:function(result){
-                                                $("#suggesstion-box").show();
-                                                $("#suggesstion-box").html(result);
-                                                $("#search-box").css("background","#FFF");
-                                            }
-                                        });
-                                    }
-
-                                    function addItem(itemId){
-                                        $.ajax({
-                                            url:'/item/'+itemId,
-                                            type:'POST',
-                                            success: function(result){
-                                                $("#search-box").val(result.codigoPatrimonial);
-                                                $("#suggesstion-box").hide();
-                                                $("#itemadded").append(result.html);
-                                            }
-                                        });
-                                    }
-
-                                    function eliminar(element){
-                                        $(element).parent().parent().remove();
-                                    }
-                                </script>
-                                
+                                <script th:src="@{/assets/js/sistema.js}"></script>
                             </div>
                             <!--end::Container-->
                         </div>

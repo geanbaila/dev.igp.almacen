@@ -108,7 +108,6 @@
                         <div class="d-flex flex-column-fluid">
                             <!--begin::Container-->
                             <div class="container-fluid">
-                                
                                 <form class="row g-3">
                                     <div class="col-12">
                                         <table class="table table-striped ">
@@ -135,14 +134,26 @@
                                                         class="label label-inline label-light-primary font-weight-bold"></span></td>
                                                     <td><a class="btn btn-bg-light btn-xs">Firmar</a></td>
                                                     <td><a onclick="verOrdenSalida(1)"><i data-feather="eye"></i></a></td>
-                                                    <td><a th:href="@{/salida/editar/{orden_id} (orden_id=${orden.id})}" ><i data-feather="edit"></i></a></td>
-                                                    <td><a th:href="@{/salida/eliminar/{orden_id} (orden_id=${orden.id})}" ><i data-feather="trash"></i></a></td>
+                                                    <td><a th:href="@{/salida/editar/{ordenId} (ordenId=${orden.id})}" ><i data-feather="edit"></i></a></td>
+                                                    <td><a th:onclick="@{eliminarSalida({ordenId},this) (ordenId=${orden.id})}" ><i data-feather="trash"></i></a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <script>
+                                            function eliminarSalida(ordenId,element){
+                                                $.ajax({
+                                                    url:'/salida/eliminar/'+ordenId,
+                                                    type:'POST',
+                                                    success:function(result){
+                                                        $(element).parent().parent().remove();
+                                                    }
+                                                });
+                                            }
+                                        </script>
                                     </div>
                                     
                                 </form>
+                                
 
                             </div>
                             <!--end::Container-->
