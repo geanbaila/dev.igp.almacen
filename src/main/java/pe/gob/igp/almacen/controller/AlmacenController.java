@@ -123,9 +123,8 @@ public class AlmacenController {
             serie,
             color
         );
-        
-        Integer itemId = itemService.save(item);
-        System.out.println("itemId: "+itemId);
+        itemService.save(item);
+
         return "redirect:/almacen"; 
     }
 
@@ -145,9 +144,7 @@ public class AlmacenController {
         ){
 
         String fechaInventario = "";
-        
         MarcaEntity marca = marcaService.findById(marcaId);
-        
         ModeloEntity modelo = modeloService.findById(modeloId);
         EstadoItemEntity estadoItem = estadoItemService.findById(estadoItemId);
         PersonalEntity personalEntity = personalService.findById(asignadoId);
@@ -166,8 +163,8 @@ public class AlmacenController {
             color
         );
         item.setId(itemId);
-        
-        itemId = itemService.save(item);
+        itemService.save(item);
+
         return "redirect:/almacen"; 
     }
    
@@ -177,7 +174,4 @@ public class AlmacenController {
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
-
-
-    //, produces = MediaType.APPLICATION_JSON_VALUE
 }

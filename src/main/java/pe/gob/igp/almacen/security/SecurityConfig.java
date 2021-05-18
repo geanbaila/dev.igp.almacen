@@ -41,7 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                      .permitAll()
                      .failureUrl("/login?error=1") //handle que recibe el error
                      .usernameParameter("usuario")
-                     .passwordParameter("clave");
+                     .passwordParameter("clave")
+                .and()
+                .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/login?logout");
     }
 
     @Bean
