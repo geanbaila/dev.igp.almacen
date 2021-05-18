@@ -1,6 +1,6 @@
 package pe.gob.igp.almacen.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,21 +25,21 @@ public class OrdenRetornoEntity {
     @Column
     private String comisionado;
     
-    @Column
-    private String comisionado_dni;
+    @Column(name = "comisionado_dni")
+    private String comisionadoDni;
     
-    @Column
-    private String comisionado_area;
+    @Column(name ="comisionado_area")
+    private String comisionadoArea;
     
     @Column
     private String asignado;
     
-    @Column
-    private String asignado_dni;
+    @Column(name = "asignado_dni")
+    private String asignadoDni;
     
-    @Column
-    private String asignado_area;
+    @Column(name = "asignado_area")
+    private String asignadoArea;
     
-    @Column
-    private Date fecha_retorno;
+    @Column(name = "fecha_retorno")
+    private Date fechaRetorno;
 }

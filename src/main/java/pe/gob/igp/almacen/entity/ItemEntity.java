@@ -45,9 +45,6 @@ public class ItemEntity {
     @Column(name = "codigo_inventario")
     private String codigoInventario;
     
-    @Column(name  = "fecha_inventario")
-    private String fechaInventario;
-    
     @Column
     private String serie;
 
@@ -59,7 +56,7 @@ public class ItemEntity {
 
     public ItemEntity(MarcaEntity marca, PuestoEntity puesto, ModeloEntity modelo, EstadoItemEntity estadoItem,
             String denominacion, String codigoPatrimonial, String codigoAmbiente, String codigoInventario,
-            String fechaInventario, String serie, String color) {
+            String serie, String color) {
         this.marca = marca;
         this.puesto = puesto;
         this.modelo = modelo;
@@ -68,7 +65,6 @@ public class ItemEntity {
         this.codigoPatrimonial = codigoPatrimonial;
         this.codigoAmbiente = codigoAmbiente;
         this.codigoInventario = codigoInventario;
-        this.fechaInventario = fechaInventario;
         this.serie = serie;
         this.color = color;
     }
@@ -143,14 +139,6 @@ public class ItemEntity {
 
     public void setCodigoInventario(String codigoInventario) {
         this.codigoInventario = codigoInventario;
-    }
-
-    public String getFechaInventario() {
-        return fechaInventario;
-    }
-
-    public void setFechaInventario(String fechaInventario) {
-        this.fechaInventario = fechaInventario;
     }
 
     public String getSerie() {

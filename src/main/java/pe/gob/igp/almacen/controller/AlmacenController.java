@@ -53,8 +53,8 @@ public class AlmacenController {
 
     @GetMapping({"","listar"})
     public ModelAndView index(){
-        List<ItemEntity> prg_item = itemService.getItem();
-        return new ModelAndView("item/listar", "prg_item", prg_item);
+        List<ItemEntity> eanItem = itemService.getItem();
+        return new ModelAndView("item/listar", "eanItem", eanItem);
     }
 
     @GetMapping("nuevo")
@@ -92,19 +92,18 @@ public class AlmacenController {
     
     @PostMapping("guardar")
     public String guardar(
-        @RequestParam(name = "codigo_patrimonial", required = false, defaultValue = "0000") String codigoPatrimonial,
-        @RequestParam(name = "codigo_inventario", required = false, defaultValue = "") String codigoInventario,
-        @RequestParam(name = "codigo_ambiente", required = false, defaultValue = "") String codigoAmbiente,
-        @RequestParam(name = "estado", required = false, defaultValue = "0") Integer estadoItemId,
+        @RequestParam(name = "codigoPatrimonial", required = false, defaultValue = "0000") String codigoPatrimonial,
+        @RequestParam(name = "codigoInventario", required = false, defaultValue = "") String codigoInventario,
+        @RequestParam(name = "codigoAmbiente", required = false, defaultValue = "") String codigoAmbiente,
+        @RequestParam(name = "estadoItemId", required = false, defaultValue = "0") Integer estadoItemId,
         @RequestParam(name = "denominacion", required = false, defaultValue = "") String denominacion,
-        @RequestParam(name = "marca", required = false, defaultValue = "0") Integer marcaId,
-        @RequestParam(name = "modelo", required = false, defaultValue = "0") Integer modeloId,
+        @RequestParam(name = "marcaId", required = false, defaultValue = "0") Integer marcaId,
+        @RequestParam(name = "modeloId", required = false, defaultValue = "0") Integer modeloId,
         @RequestParam(name = "serie", required = false, defaultValue = "") String serie,
         @RequestParam(name = "color", required = false, defaultValue = "") String color,
-        @RequestParam(name = "asignado", required = false, defaultValue = "0") int asignado
+        @RequestParam(name = "asignadoId", required = false, defaultValue = "0") int asignadoId
         ){
 
-        String fechaInventario = "";
         Integer PuestoId = 1;
         MarcaEntity marca = marcaService.findById(marcaId);
         PuestoEntity puesto = puestoService.findById(PuestoId);
@@ -119,31 +118,28 @@ public class AlmacenController {
             codigoPatrimonial,
             codigoAmbiente,
             codigoInventario,
-            fechaInventario,
             serie,
             color
         );
         itemService.save(item);
-
         return "redirect:/almacen"; 
     }
 
     @PostMapping("actualizar")
     public String actualizar(
-        @RequestParam(name = "item_id", required = false, defaultValue = "0") Integer itemId,
-        @RequestParam(name = "codigo_patrimonial", required = true, defaultValue = "0000") String codigoPatrimonial,
-        @RequestParam(name = "codigo_inventario", required = false, defaultValue = "") String codigoInventario,
-        @RequestParam(name = "codigo_ambiente", required = false, defaultValue = "") String codigoAmbiente,
-        @RequestParam(name = "estado", required = false, defaultValue = "0") Integer estadoItemId,
+        @RequestParam(name = "itemId", required = false, defaultValue = "0") Integer itemId,
+        @RequestParam(name = "codigoPatrimonial", required = true, defaultValue = "0000") String codigoPatrimonial,
+        @RequestParam(name = "codigoInventario", required = false, defaultValue = "") String codigoInventario,
+        @RequestParam(name = "codigoAmbiente", required = false, defaultValue = "") String codigoAmbiente,
+        @RequestParam(name = "estadoItemId", required = false, defaultValue = "0") Integer estadoItemId,
         @RequestParam(name = "denominacion", required = false, defaultValue = "") String denominacion,
-        @RequestParam(name = "marca", required = false, defaultValue = "0") Integer marcaId,
-        @RequestParam(name = "modelo", required = false, defaultValue = "0") Integer modeloId,
+        @RequestParam(name = "marcaId", required = false, defaultValue = "0") Integer marcaId,
+        @RequestParam(name = "modeloId", required = false, defaultValue = "0") Integer modeloId,
         @RequestParam(name = "serie", required = false, defaultValue = "") String serie,
         @RequestParam(name = "color", required = false, defaultValue = "") String color,
-        @RequestParam(name = "asignado", required = false, defaultValue = "0") int asignadoId
+        @RequestParam(name = "asignadoId", required = false, defaultValue = "0") int asignadoId
         ){
 
-        String fechaInventario = "";
         MarcaEntity marca = marcaService.findById(marcaId);
         ModeloEntity modelo = modeloService.findById(modeloId);
         EstadoItemEntity estadoItem = estadoItemService.findById(estadoItemId);
@@ -158,13 +154,11 @@ public class AlmacenController {
             codigoPatrimonial,
             codigoAmbiente,
             codigoInventario,
-            fechaInventario,
             serie,
             color
         );
         item.setId(itemId);
         itemService.save(item);
-
         return "redirect:/almacen"; 
     }
    

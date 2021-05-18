@@ -111,26 +111,26 @@
                             <div class="container-fluid">
                                 <form class="row g-3" method="POST" th:action="@{/almacen/guardar}">
                                     <div class="col-md-3">
-                                        <label for="codigo_patrimonial" class="form-label">C. patrimonial</label>
-                                        <input type="text" class="form-control" name="codigo_patrimonial" />
+                                        <label for="codigoPatrimonial" class="form-label">C. patrimonial</label>
+                                        <input type="text" class="form-control" name="codigoPatrimonial" />
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="cocdigo_inventario" class="form-label"><span class="text-danger">*</span>
+                                        <label for="codigoInventario" class="form-label"><span class="text-danger">*</span>
                                             C.Inventario</label>
-                                        <input type="text" class="form-control" name="codigo_inventario" maxlength="8"/>
+                                        <input type="text" class="form-control" name="codigoInventario" maxlength="8"/>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="codigo_ambiente" class="form-label"><span class="text-danger">*</span>
+                                        <label for="codigoAmbiente" class="form-label"><span class="text-danger">*</span>
                                             C.Ambiente</label>
-                                        <input type="text" class="form-control" name="codigo_ambiente" />
+                                        <input type="text" class="form-control" name="codigoAmbiente" />
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="estado" class="form-label"><span class="text-danger">*</span>
+                                        <label for="estadoItemId" class="form-label"><span class="text-danger">*</span>
                                             Estado</label>
-                                        <select class="form-control" name="estado" >
+                                        <select class="form-control" name="estadoItemId" >
                                         <option value="0"> -- seleccione -- </option>
-                                        <div th:each="estado : ${data.endEstadoItem}" th:remove="tag">
-                                            <option th:value="${estado.id}" th:text="${estado.nombre}"></option>
+                                        <div th:each="estadoItem : ${data.endEstadoItem}" th:remove="tag">
+                                            <option th:value="${estadoItem.id}" th:text="${estadoItem.nombre}"></option>
                                         </div>
                                         </select>
                                     </div>
@@ -143,8 +143,8 @@
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">
-                                        <label for="marca" class="form-label">Marca</label>
-                                        <select class="form-control" name="marca" >
+                                        <label for="marcaId" class="form-label">Marca</label>
+                                        <select class="form-control" name="marcaId" >
                                             <option value="0"> -- seleccione -- </option>
                                             <div th:each="marca : ${data.eanMarca}" th:remove="tag">
                                                 <option th:value="${marca.id}" th:text="${marca.nombre}"></option>
@@ -152,8 +152,8 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="modelo" class="form-label">Modelo</label>
-                                        <select class="form-control" name="modelo" >
+                                        <label for="modeloId" class="form-label">Modelo</label>
+                                        <select class="form-control" name="modeloId" >
                                             <option value="0"> -- seleccione -- </option>
                                             <div th:each="modelo : ${data.eanModelo}" th:remove="tag">
                                                 <option th:value="${modelo.id}" th:text="${modelo.nombre}"></option>
@@ -170,8 +170,8 @@
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">
-                                        <label for="asignado" class="form-label">Asignado a</label>
-                                        <select class="form-control" name="asignado" >
+                                        <label for="asignadoId" class="form-label">Asignado a</label>
+                                        <select class="form-control" name="asignadoId" >
                                             <option value="0"> -- seleccione -- </option>
                                             <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
                                                 <option th:value="${personal.id}" th:text="${personal.nombre}+ ' - ' +${personal.puesto.nombre}"></option>

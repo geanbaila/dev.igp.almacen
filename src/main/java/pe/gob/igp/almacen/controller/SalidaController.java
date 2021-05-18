@@ -134,20 +134,19 @@ public class SalidaController {
 
     @RequestMapping("guardar")
     public String guardar(
-        @RequestParam(name = "motivo_id", required = false) Integer motivoId, 
-        @RequestParam(name = "origen_id", required = false) Integer origenId, 
-        @RequestParam(name = "recibe_id", required = false) Integer recibeId, 
-        @RequestParam(name = "recepciona_id", required = false) Integer recepcionaId,
+        @RequestParam(name = "motivoId", required = false) Integer motivoId, 
+        @RequestParam(name = "origenId", required = false) Integer origenId, 
+        @RequestParam(name = "recibeId", required = false) Integer recibeId, 
+        @RequestParam(name = "recepcionaId", required = false) Integer recepcionaId,
         @RequestParam(name = "destino", required = false) String destino,
-        @RequestParam(name = "fecha_salida_prevista", required = false) Date fechaSalidaPrevista,
-        @RequestParam(name = "fecha_retorno_prevista", required = false) Date fechaRetornoPrevista,
-        @RequestParam(name = "numero_orden", required = false) String numeroOrden,
+        @RequestParam(name = "fechaSalidaPrevista", required = false) Date fechaSalidaPrevista,
+        @RequestParam(name = "fechaRetornoPrevista", required = false) Date fechaRetornoPrevista,
+        @RequestParam(name = "numeroOrden", required = false) String numeroOrden,
         @RequestParam(name = "observacion", required = false) String observacion,
         @RequestParam(name = "accesorio", required = false) String accesorio,
-        @RequestParam(name = "item_id", required = false) String itemIds
+        @RequestParam(name = "itemIds", required = false) String itemIds
     ){
-        ItemEntity item = new ItemEntity();
-
+        
         String comisionadoDni = "";
         String comisionadoArea = "";
         String autorizaDni = "";
@@ -183,7 +182,6 @@ public class SalidaController {
             observacion,
             numeroOrden);
         orden = ordenService.save(orden);
-        
         String[] eanItem = itemIds.split(",");
         if(eanItem.length>0){
             for(String itemId : eanItem){
@@ -199,18 +197,18 @@ public class SalidaController {
 
     @PostMapping("actualizar")
     public String actualizar(
-        @RequestParam(name = "orden_id", required = false) Integer ordenId,    
-        @RequestParam(name = "motivo_id", required = false) Integer motivoId, 
-        @RequestParam(name = "origen_id", required = false) Integer origenId, 
-        @RequestParam(name = "recibe_id", required = false) Integer recibeId, 
-        @RequestParam(name = "recepciona_id", required = false) Integer recepcionaId,
+        @RequestParam(name = "ordenId", required = false) Integer ordenId,    
+        @RequestParam(name = "motivoId", required = false) Integer motivoId, 
+        @RequestParam(name = "origenId", required = false) Integer origenId, 
+        @RequestParam(name = "recibeId", required = false) Integer recibeId, 
+        @RequestParam(name = "recepcionaId", required = false) Integer recepcionaId,
         @RequestParam(name = "destino", required = false) String destino,
-        @RequestParam(name = "fecha_salida_prevista", required = false) Date fechaSalidaPrevista,
-        @RequestParam(name = "fecha_retorno_prevista", required = false) Date fechaRetornoPrevista,
-        @RequestParam(name = "numero_orden", required = false) String numeroOrden,
+        @RequestParam(name = "fechaSalidaPrevista", required = false) Date fechaSalidaPrevista,
+        @RequestParam(name = "fechaRetornoPrevista", required = false) Date fechaRetornoPrevista,
+        @RequestParam(name = "numeroOrden", required = false) String numeroOrden,
         @RequestParam(name = "observacion", required = false) String observacion,
         @RequestParam(name = "accesorio", required = false) String accesorio,
-        @RequestParam(name = "item_id", required = false) String itemIds
+        @RequestParam(name = "itemIds", required = false) String itemIds
     ){
         
         String comisionadoDni = "";
@@ -249,7 +247,6 @@ public class SalidaController {
             numeroOrden);
         orden.setId(ordenId);
         orden = ordenService.save(orden);
-        
         String[] eanItem = itemIds.split(",");
         if(eanItem.length>0){
             ordenDetalleService.removeAll(ordenId);
@@ -260,7 +257,6 @@ public class SalidaController {
                 ordenDetalleService.save(ordenDetalle);
             }
         }
-
         logger.info("Se ha registrado una orden de salida.");
         return "redirect:/salida";
     }
@@ -279,5 +275,4 @@ public class SalidaController {
         return "salida/listar";
     }
 
-    
 }

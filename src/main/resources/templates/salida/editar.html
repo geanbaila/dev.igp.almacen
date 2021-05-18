@@ -109,13 +109,14 @@
                             <!--begin::Container-->
                             <div class="container-fluid">
                                 <form class="row g-3" method="POST" th:action="@{/salida/actualizar}">
-                                    <input type="hidden" name="orden_id" th:value="${orden.id}">
+                                    <input type="hidden" name="ordenId" th:value="${orden.id}">
+                                    <input type="text" name="itemIds" th:value="${itemIds}"/>
                                     <div class="col-md-3">
                                         <label for="inputEmail4" class="form-label">
                                             <span class="text-danger">*</span>
                                             Motivo
                                         </label>
-                                        <select name="motivo_id" class="form-select">
+                                        <select name="motivoId" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="motivo : ${data.eanMotivo}" th:remove="tag">
                                                 <div th:if="${motivo.id}==${orden.motivo.id}" th:remove="tag">
@@ -130,7 +131,7 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label">
                                             <span class="text-danger">*</span> Origen</label>
-                                        <select name="origen_id" class="form-select">
+                                        <select name="origenId" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="origen : ${data.eanOrigen}" th:remove="tag">
                                                 <div th:if="${origen.id}==${orden.origen.id}" th:remove="tag">
@@ -145,7 +146,7 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label">
                                         <span class="text-danger">*</span> Recibe</label>
-                                        <select name="recibe_id" class="form-select">
+                                        <select name="recibeId" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
                                                 <div th:if="${personal.id}==${orden.recibe.id}" th:remove="tag"> 
@@ -160,7 +161,7 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label"><span
                                                 class="text-danger">*</span> Recepciona</label>
-                                        <select name="recepciona_id" class="form-select">
+                                        <select name="recepcionaId" class="form-select">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
                                                 <div th:if="${personal.id}==${orden.recepciona.id}" th:remove="tag">
@@ -189,20 +190,19 @@
                                     <div class="col-3s">
                                         <label for="inputAddress2" class="form-label"><span class="text-danger">*</span>
                                             Fecha de salida</label>
-                                        <input type="text" name="fecha_salida_prevista" class="form-control date" th:value="${orden.fechaSalidaPrevista}" />
+                                        <input type="text" name="fechaSalidaPrevista" class="form-control date" th:value="${orden.fechaSalidaPrevista}" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputCity" class="form-label">Fecha de retorno</label>
-                                        <input type="text" name="fecha_retorno_prevista" class="form-control date" th:value="${orden.fechaRetornoPrevista}"/>
+                                        <input type="text" name="fechaRetornoPrevista" class="form-control date" th:value="${orden.fechaRetornoPrevista}"/>
                                         <code>Fecha prevista de retorno.</code>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputCity" class="form-label">Número de Orden</label>
-                                        <input type="text" name="numero_orden" class="form-control" th:value="${orden.numeroOrden}" disabled />
+                                        <input type="text" name="numeroOrden" class="form-control" th:value="${orden.numeroOrden}" disabled />
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-12">
-                                        <input type="text" name="item_id" th:value="${itemIds}"/>
                                         <table class="table table-striped ">
                                             <thead class="thead-dark">
                                                 <tr>
@@ -239,7 +239,7 @@
                                                                 <input type="checkbox">
                                                             </div>
                                                         </td>
-                                                        <td><a th:onclick="@{eliminarItem({ordenDetalleId},{itemId},this) (itemId=${ordenDetalle.item.id}, ordenDetalleId=${ordenDetalle.id})}"><i data-feather="trash"></i></a></td>
+                                                        <td><a th:onclick="@{eliminarItemOrdenDetalle({ordenDetalleId},{itemId},this) (itemId=${ordenDetalle.item.id}, ordenDetalleId=${ordenDetalle.id})}"><i data-feather="trash"></i></a></td>
                                                     </tr>
                                                 </div>
                                             </tbody>

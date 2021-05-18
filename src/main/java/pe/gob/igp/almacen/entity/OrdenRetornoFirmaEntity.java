@@ -17,10 +17,9 @@ public class OrdenRetornoFirmaEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    
     @OneToOne
     @JoinColumn(name = "orden_retorno_id", referencedColumnName = "id")
-    private OrdenRetornoEntity orden_retorno;
+    private OrdenRetornoEntity ordenRetorno;
     
     @Column
     private String cargo;

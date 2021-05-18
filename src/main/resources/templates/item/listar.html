@@ -130,13 +130,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <div th:each="item,iterador : ${prg_item}">
-                                                    <div th:if="${iterador.index}%2==0">
-                                                        <tr scope="row" >
-                                                    </div>
-                                                    <div th:unless="${iterador.index}%2==0">
-                                                        <tr>
-                                                    </div>
+                                                <div th:each="item : ${eanItem}">
+                                                    <tr>
                                                         <td th:text="${item.id}"></td>
                                                         <td th:text="${item.codigoPatrimonial}"></td>
                                                         <td th:text="${item.denominacion}"></td>

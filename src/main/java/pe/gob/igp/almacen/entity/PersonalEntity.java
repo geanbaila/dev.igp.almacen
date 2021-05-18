@@ -25,7 +25,6 @@ public class PersonalEntity {
     private PuestoEntity puesto;
 
     public PersonalEntity(){
-
     }
 
     public Integer getId() {

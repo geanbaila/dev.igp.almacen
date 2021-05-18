@@ -1,6 +1,6 @@
 package pe.gob.igp.almacen.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class OrdenRetornoDetalleEntity {
     
     @OneToOne
     @JoinColumn(name="orden_retorno_id", referencedColumnName = "id")
-    private OrdenRetornoEntity orden_retorno;
+    private OrdenRetornoEntity ordenRetorno;
     
     @Column
     private String marca;
@@ -32,14 +32,14 @@ public class OrdenRetornoDetalleEntity {
     @Column
     private String denominacion;
     
-    @Column
-    private String codigo_patrimonial;
+    @Column(name="codigo_patrimonial")
+    private String codigoPatrimonial;
     
-    @Column
-    private String codigo_ambiente;
+    @Column(name="codigo_ambiente")
+    private String codigoAmbiente;
     
-    @Column
-    private String codigo_inventario;
+    @Column(name="codigo_inventario")
+    private String codigoInventario;
     
     @Column
     private String serie;
@@ -47,6 +47,6 @@ public class OrdenRetornoDetalleEntity {
     @Column
     private String color;
 
-    @Column
-    private Date fecha_retorno_prevista;
+    @Column(name="fecha_retorno_prevista")
+    private Date fechaRetornoPrevista;
 }

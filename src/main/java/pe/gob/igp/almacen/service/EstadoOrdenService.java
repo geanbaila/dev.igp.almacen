@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import pe.gob.igp.almacen.entity.EstadoOrdenEntity;
 import pe.gob.igp.almacen.repository.EstadoOrdenRepository;
 
-
-
 @Service
 public class EstadoOrdenService {
     

@@ -15,9 +15,9 @@ function agregarItem(itemId){
         url:'/item/'+itemId,
         type:'POST',
         success: function(result){
-            var ids = $("input[name=item_id]").val();
+            var ids = $("input[name=itemIds]").val();
             var separador = (ids!="")?",":"";
-            $("input[name=item_id]").val(itemId+separador+ids);
+            $("input[name=itemIds]").val(itemId+separador+ids);
             $("#search-box").val(result.codigoPatrimonial);
             $("#suggesstion-box").hide();
             $("#itemadded").append(result.html);
@@ -25,10 +25,10 @@ function agregarItem(itemId){
     });
 }
 
-function eliminar(itemId,element){
+function eliminarItemDom(itemId,element){
     var separador = "";
     var flag = false;
-    var ids = $("input[name=item_id]").val();
+    var ids = $("input[name=itemIds]").val();
     var _ids = ids.split(",");
     ids = "";
     for(var i=0;i<_ids.length;i++){
@@ -39,18 +39,18 @@ function eliminar(itemId,element){
             ids+= separador+_ids[i];
         }
     }
-    $("input[name=item_id]").val(ids);
+    $("input[name=itemIds]").val(ids);
     $(element).parent().parent().remove();
 }
 
-function eliminarItem(ordenDetalleId,itemId,element){
+function eliminarItemOrdenDetalle(ordenDetalleId,itemId,element){
     var flag = false;
     var separador = "";
     $.ajax({
         url:'/salida/ordendetalle/'+ordenDetalleId,
         type:'POST',
         success: function(result){
-            var ids = $("input[name=item_id]").val();
+            var ids = $("input[name=itemIds]").val();
             var _ids = ids.split(",");
             ids = "";
             for(var i=0;i<_ids.length;i++){
@@ -62,7 +62,8 @@ function eliminarItem(ordenDetalleId,itemId,element){
                     ids+= separador+_ids[i];
                 }
             }
-            $("input[name=item_id]").val(ids);
+            $("input[name=itemIds]").val(ids);
         }
     });
 }
+
