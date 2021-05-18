@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -36,7 +39,10 @@ import pe.gob.igp.almacen.service.PuestoService;
 @RequestMapping("almacen")
 public class AlmacenController {
 
-    final Integer paginaFilas = 2;
+    Logger logger = LoggerFactory.getLogger(AlmacenController.class);
+    
+    @Value("${spring.application.paginaFilas:10}")
+    Integer paginaFilas;
 
     @Autowired
     private ItemService itemService;
@@ -58,12 +64,12 @@ public class AlmacenController {
 
     @GetMapping({"","listar"})
     public ModelAndView index(@RequestParam(name="pagina", defaultValue = "0") Integer pagina){
-        System.out.println("pagina: "+pagina);
         Pageable pageable = PageRequest.of(pagina, paginaFilas);
         Map<String,Object> data = itemService.getItem(pageable);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("data", data);
         modelAndView.setViewName("item/listar");
+        logger.info("Listando los items.");
         return modelAndView;
     }
 
@@ -78,6 +84,7 @@ public class AlmacenController {
         data.put("eanModelo", eanModelo);
         data.put("eanPersonal", eanPersonal);
         data.put("endEstadoItem",eanEstadoItem);
+        logger.info("En proceso de registro de un nuevo item.");
         return new ModelAndView("item/nuevo", "data", data);
     }
 
@@ -97,6 +104,7 @@ public class AlmacenController {
         modelAndView.addObject("data", data);
         modelAndView.addObject("item", item);
         modelAndView.setViewName("item/editar");
+        logger.info("En proceso de edición de un item.");
 		return modelAndView;
     }
     
@@ -132,6 +140,7 @@ public class AlmacenController {
             color
         );
         itemService.save(item);
+        logger.info("Registro de un item.");
         return "redirect:/almacen"; 
     }
 
@@ -169,12 +178,14 @@ public class AlmacenController {
         );
         item.setId(itemId);
         itemService.save(item);
+        logger.info("Actualización de un item (itemId:"+itemId+").");
         return "redirect:/almacen"; 
     }
    
     @PostMapping(value = "/eliminar/{itemId}")
     public ResponseEntity<String> eliminar(@PathVariable("itemId") Integer itemId){
         itemService.remove(itemId);
+        logger.info("Eliminación de un item (itemId:"+itemId+").");
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 

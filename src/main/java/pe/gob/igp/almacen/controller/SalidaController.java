@@ -8,6 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import pe.gob.igp.almacen.entity.EstadoOrdenEntity;
-import pe.gob.igp.almacen.entity.ItemEntity;
 import pe.gob.igp.almacen.entity.MarcaEntity;
 import pe.gob.igp.almacen.entity.ModeloEntity;
 import pe.gob.igp.almacen.entity.MotivoEntity;
@@ -46,7 +46,8 @@ import pe.gob.igp.almacen.service.UsuarioService;
 @Controller
 public class SalidaController {
 
-    final Integer paginaFilas = 1;
+    @Value("${spring.application.paginaFilas:10}")
+    Integer paginaFilas;
 
     Logger logger = LoggerFactory.getLogger(SalidaController.class);
 
@@ -90,7 +91,7 @@ public class SalidaController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("data", data);
         modelAndView.setViewName("salida/listar");
-        logger.debug("Listando las órdenes de salida");
+        logger.info("Listando las órdenes de salida");
         return modelAndView;
     }
 
@@ -107,6 +108,7 @@ public class SalidaController {
         data.put("eanMarca", prg_marca);
         data.put("eanModelo", prg_modelo);
         data.put("eanPersonal", prg_personal);
+        logger.info("En proceso de creación de orden de salida");
         return new ModelAndView("salida/nuevo", "data", data);
     }
 
@@ -138,6 +140,7 @@ public class SalidaController {
         modelAndView.addObject("eanOrdenDetalle", eanOrdenDetalle);
         modelAndView.addObject("itemIds", itemIds);
         modelAndView.setViewName("salida/editar");
+        logger.info("En proceso de edición de orden de salida");
         return modelAndView;
     }
 
@@ -266,21 +269,21 @@ public class SalidaController {
                 ordenDetalleService.save(ordenDetalle);
             }
         }
-        logger.info("Se ha registrado una orden de salida.");
+        logger.info("Se ha actualizado una orden de salida.");
         return "redirect:/salida";
     }
 
     @PostMapping("eliminar/{ordenId}")
     public String eliminar(@PathVariable("ordenId") Integer ordenId){
         ordenService.remove(ordenId);
-        logger.warn("Se ha eliminado un orden de salida (ordenId:"+ordenId+").");
+        logger.info("Se ha eliminado un orden de salida (ordenId:"+ordenId+").");
         return "salida/listar";
     }
 
     @PostMapping("ordendetalle/{ordenDetalleId}")
     public String eliminarOrdenDetalle(@PathVariable("ordenDetalleId") Integer ordenDetalleId){
         ordenDetalleService.remove(ordenDetalleId);
-        logger.warn("Se ha eliminado un orden de salida (ordenDetalleId:"+ordenDetalleId+").");
+        logger.info("Se ha eliminado un orden de salida (ordenDetalleId:"+ordenDetalleId+").");
         return "salida/listar";
     }
 

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.gob.igp.almacen.entity.AuditoriaEntity;
 import pe.gob.igp.almacen.entity.ItemEntity;
@@ -55,6 +57,7 @@ public class ItemService {
         return itemId;
     }
 
+    @Transactional(propagation=Propagation.REQUIRED)
     public void remove(Integer itemId){
         itemRepository.deleteById(itemId);
         callAuditor(itemId,"delete");

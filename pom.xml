@@ -46,6 +46,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<!-- monitoring app-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- /monitoring app-->
 		<!-- creo que es para persistencia-->
 		<dependency>
             <groupId>org.hibernate.javax.persistence</groupId>

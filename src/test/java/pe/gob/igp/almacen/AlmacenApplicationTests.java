@@ -20,6 +20,9 @@ class AlmacenApplicationTests {
 		String clave = "secret";
 		String claveEncriptada = encoder.encode(clave);
 		//$2a$10$dbAnQXcVvSdCBmAREoItCek3SPt3ey4Lz9/V3dMZ02QDS/M0QpD0q
+
+
+		//throw url for monitoring app http://localhost:8080/actuator/health
 	}
 
 }
