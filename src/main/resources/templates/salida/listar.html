@@ -123,7 +123,7 @@
                                                     <th scope="col" colspan="3">Acciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody th:each="orden : ${eanOrden}">
+                                            <tbody th:each="orden : ${data.eanOrden}">
                                                 <tr>
                                                     <td th:text="${orden.id}"></td>
                                                     <td th:text="${orden.motivo.nombre}"></td>
@@ -138,6 +138,25 @@
                                                     <td><a th:onclick="@{eliminarSalida({ordenId},this) (ordenId=${orden.id})}" ><i data-feather="trash"></i></a></td>
                                                 </tr>
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="10" align="center">
+                                                        <div th:each="paginas : ${#numbers.sequence(0,data.totalPagina-1)}" th:remove="tag">
+                                                            <div th:if="${paginas}==0" th:remove="tag">
+                                                                &nbsp;<a th:href="@{/salida/listar?pagina=0}"><i data-feather="chevron-left"></i> Primero</a>&nbsp;
+                                                            </div>
+                                                            <div th:unless="${paginas}==0" th:remove="tag">
+                                                                <div th:if="${paginas}==${data.totalPagina-1}" th:remove="tag">
+                                                                    &nbsp;<a th:href="@{/salida/listar?pagina={paginas} (paginas=${paginas})}">Último <i data-feather="chevron-right"></i></a>&nbsp;
+                                                                </div>
+                                                                <div th:unless="${paginas}==${data.totalPagina-1}" th:remove="tag">
+                                                                    &nbsp;<a th:href="@{/salida/listar?pagina={paginas} (paginas=${paginas})}" th:text="${paginas}"></a>&nbsp;
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                         <script>
                                             function eliminarSalida(ordenId,element){

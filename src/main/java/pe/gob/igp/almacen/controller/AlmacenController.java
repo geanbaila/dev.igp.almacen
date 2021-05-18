@@ -2,8 +2,11 @@ package pe.gob.igp.almacen.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map; 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,8 @@ import pe.gob.igp.almacen.service.PuestoService;
 @RequestMapping("almacen")
 public class AlmacenController {
 
+    final Integer paginaFilas = 2;
+
     @Autowired
     private ItemService itemService;
 
@@ -52,9 +57,14 @@ public class AlmacenController {
     private PersonalService personalService;
 
     @GetMapping({"","listar"})
-    public ModelAndView index(){
-        List<ItemEntity> eanItem = itemService.getItem();
-        return new ModelAndView("item/listar", "eanItem", eanItem);
+    public ModelAndView index(@RequestParam(name="pagina", defaultValue = "0") Integer pagina){
+        System.out.println("pagina: "+pagina);
+        Pageable pageable = PageRequest.of(pagina, paginaFilas);
+        Map<String,Object> data = itemService.getItem(pageable);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("data", data);
+        modelAndView.setViewName("item/listar");
+        return modelAndView;
     }
 
     @GetMapping("nuevo")

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="orden_detalle")
@@ -26,27 +27,35 @@ public class OrdenDetalleEntity {
     private ItemEntity item;
 
     @Column
+    @Transient
     private String marca;
     
     @Column
+    @Transient
     private String modelo;
     
     @Column
+    @Transient
     private String denominacion;
     
     @Column(name = "codigo_patrimonial")
+    @Transient
     private String codigoPatrimonial;
     
     @Column(name = "codigo_ambiente")
+    @Transient
     private String codigoAmbiente;
     
     @Column(name = "codigo_invetario")
+    @Transient
     private String codigoInvetario;
     
     @Column
+    @Transient
     private String serie;
     
     @Column
+    @Transient
     private String color;
 
     @Column

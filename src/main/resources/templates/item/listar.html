@@ -130,7 +130,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <div th:each="item : ${eanItem}">
+                                                <div th:each="item : ${data.eanItem}">
                                                     <tr>
                                                         <td th:text="${item.id}"></td>
                                                         <td th:text="${item.codigoPatrimonial}"></td>
@@ -145,6 +145,25 @@
                                                     </tr>
                                                 </div>
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="10" align="center">
+                                                        <div th:each="paginas : ${#numbers.sequence(0,data.totalPagina-1)}" th:remove="tag">
+                                                            <div th:if="${paginas}==0" th:remove="tag">
+                                                                &nbsp;<a th:href="@{/almacen/listar?pagina=0}"><i data-feather="chevron-left"></i> Primero</a>&nbsp;
+                                                            </div>
+                                                            <div th:unless="${paginas}==0" th:remove="tag">
+                                                                <div th:if="${paginas}==${data.totalPagina-1}" th:remove="tag">
+                                                                    &nbsp;<a th:href="@{/almacen/listar?pagina={paginas} (paginas=${paginas})}">Último <i data-feather="chevron-right"></i></a>&nbsp;
+                                                                </div>
+                                                                <div th:unless="${paginas}==${data.totalPagina-1}" th:remove="tag">
+                                                                    &nbsp;<a th:href="@{/almacen/listar?pagina={paginas} (paginas=${paginas})}" th:text="${paginas}"></a>&nbsp;
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                         <script>
                                             function eliminarItem(itemId,element){

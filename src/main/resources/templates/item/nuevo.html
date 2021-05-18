@@ -112,17 +112,17 @@
                                 <form class="row g-3" method="POST" th:action="@{/almacen/guardar}">
                                     <div class="col-md-3">
                                         <label for="codigoPatrimonial" class="form-label">C. patrimonial</label>
-                                        <input type="text" class="form-control" name="codigoPatrimonial" />
+                                        <input type="text" class="form-control" name="codigoPatrimonial" value="x" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="codigoInventario" class="form-label"><span class="text-danger">*</span>
                                             C.Inventario</label>
-                                        <input type="text" class="form-control" name="codigoInventario" maxlength="8"/>
+                                        <input type="text" class="form-control" name="codigoInventario" maxlength="8" value="x" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="codigoAmbiente" class="form-label"><span class="text-danger">*</span>
                                             C.Ambiente</label>
-                                        <input type="text" class="form-control" name="codigoAmbiente" />
+                                        <input type="text" class="form-control" name="codigoAmbiente" value="x" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="estadoItemId" class="form-label"><span class="text-danger">*</span>
@@ -138,7 +138,7 @@
                                     <div class="col-md-12">
                                         <label for="denominacion" class="form-label"><span class="text-danger">*</span>
                                             Denominación</label>
-                                        <textarea type="text" class="form-control" rows="2" name="denominacion"></textarea>
+                                        <textarea type="text" class="form-control" rows="2" name="denominacion">denominación</textarea>
                                         <code>Máximo de caracteres permitidos 0/100.</code>
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
@@ -162,11 +162,11 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="serie" class="form-label">Serie</label>
-                                        <input type="text" class="form-control" name="serie" />
+                                        <input type="text" class="form-control" name="serie" value="x" />
                                     </div>
                                     <div class="col-md-3">
                                         <label for="color" class="form-label">Color</label>
-                                        <input type="text" class="form-control" name="color" />
+                                        <input type="text" class="form-control" name="color" value="x" />
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-md-3">

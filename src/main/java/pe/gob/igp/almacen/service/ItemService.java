@@ -1,9 +1,14 @@
 package pe.gob.igp.almacen.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +27,16 @@ public class ItemService {
 
     public List<ItemEntity> getItem(){
         return itemRepository.findAll();        
+    }
+
+    public Map<String,Object> getItem(Pageable page){
+        Page<ItemEntity> i = itemRepository.findAll(page);
+        int totalPagina = i.getTotalPages();
+        List<ItemEntity> eanItem = i.getContent();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("totalPagina", totalPagina);
+        map.put("eanItem", eanItem);
+        return map;
     }
 
     public ItemEntity findById(int item_id){

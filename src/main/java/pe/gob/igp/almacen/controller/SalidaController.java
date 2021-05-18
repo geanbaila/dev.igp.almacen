@@ -8,6 +8,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +45,9 @@ import pe.gob.igp.almacen.service.UsuarioService;
 @RequestMapping("/salida")
 @Controller
 public class SalidaController {
+
+    final Integer paginaFilas = 1;
+
     Logger logger = LoggerFactory.getLogger(SalidaController.class);
 
     @Autowired
@@ -79,10 +84,14 @@ public class SalidaController {
     private OrdenDetalleService ordenDetalleService;
     
     @GetMapping({"","listar"})
-    public ModelAndView home(){
-        List<OrdenEntity> eanOrden = ordenService.getOrden();
-        logger.debug("Listando las órdenes de salida:"+eanOrden.toString());
-        return new ModelAndView("salida/listar", "eanOrden", eanOrden);
+    public ModelAndView home(@RequestParam(name="pagina", defaultValue = "0") Integer pagina){
+        Pageable pageable = PageRequest.of(pagina, paginaFilas);
+        Map<String,Object> data = ordenService.getOrden(pageable);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("data", data);
+        modelAndView.setViewName("salida/listar");
+        logger.debug("Listando las órdenes de salida");
+        return modelAndView;
     }
 
     @GetMapping("nuevo")
