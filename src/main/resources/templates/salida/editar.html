@@ -110,13 +110,13 @@
                             <div class="container-fluid">
                                 <form class="row g-3" method="POST" th:action="@{/salida/actualizar}">
                                     <input type="hidden" name="ordenId" th:value="${orden.id}">
-                                    <input type="text" name="itemIds" th:value="${itemIds}"/>
+                                    <input type="hidden" name="itemIds" th:value="${itemIds}"/>
                                     <div class="col-md-3">
                                         <label for="inputEmail4" class="form-label">
                                             <span class="text-danger">*</span>
                                             Motivo
                                         </label>
-                                        <select name="motivoId" class="form-select">
+                                        <select name="motivoId" class="form-control">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="motivo : ${data.eanMotivo}" th:remove="tag">
                                                 <div th:if="${motivo.id}==${orden.motivo.id}" th:remove="tag">
@@ -131,7 +131,7 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label">
                                             <span class="text-danger">*</span> Origen</label>
-                                        <select name="origenId" class="form-select">
+                                        <select name="origenId" class="form-control">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="origen : ${data.eanOrigen}" th:remove="tag">
                                                 <div th:if="${origen.id}==${orden.origen.id}" th:remove="tag">
@@ -146,7 +146,7 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label">
                                         <span class="text-danger">*</span> Recibe</label>
-                                        <select name="recibeId" class="form-select">
+                                        <select name="recibeId" class="form-control">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
                                                 <div th:if="${personal.id}==${orden.recibe.id}" th:remove="tag"> 
@@ -161,7 +161,7 @@
                                     <div class="col-md-3">
                                         <label for="inputPassword4" class="form-label"><span
                                                 class="text-danger">*</span> Recepciona</label>
-                                        <select name="recepcionaId" class="form-select">
+                                        <select name="recepcionaId" class="form-control">
                                             <option value="0"> -- Seleccionar --</option>
                                             <div th:each="personal : ${data.eanPersonal}" th:remove="tag">
                                                 <div th:if="${personal.id}==${orden.recepciona.id}" th:remove="tag">
@@ -185,7 +185,7 @@
                                         <label for="inputCity" class="form-label">Buscar bienes </label>
                                         <input type="text" class="form-control" id="search-box" onkeyup="buscarBienes(this.value)" value="7408" />
                                         <code>Buscar bienes <i data-feather="search"></i></code>
-                                        <div id="suggesstion-box">aquí las sugerencias</div>
+                                        <div id="suggesstion-box"></div>
                                     </div>
                                     <div class="col-3s">
                                         <label for="inputAddress2" class="form-label"><span class="text-danger">*</span>
@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="inputCity" class="form-label">Número de Orden</label>
-                                        <input type="text" name="numeroOrden" class="form-control" th:value="${orden.numeroOrden}" disabled />
+                                        <input type="text" name="numeroOrden" class="form-control" th:value="${orden.numeroOrden}" />
                                     </div>
                                     <div class="col-md-12">&nbsp;<br/></div>
                                     <div class="col-12">

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -33,14 +34,24 @@ public class OrdenService {
        return ordenRepository.findAll();
     }
 
-    public Map<String,Object> getOrden(Pageable page){
-        Page<OrdenEntity> o = ordenRepository.findAll(page);
+    public Map<String,Object> getOrden(Pageable page, String criterio){
+        Page<OrdenEntity> o = null;
+        if(criterio.isEmpty()){
+            o = ordenRepository.findAll(page);
+        }else{
+            o = ordenRepository.findAllBy(page,criterio);
+        }
+        
         int totalPagina = o.getTotalPages();
         List<OrdenEntity> eanItem = o.getContent();
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("totalPagina", totalPagina);
         map.put("eanOrden", eanItem);
         return map;
+    }
+
+    public List<OrdenEntity> getOrden(String criterio){
+        return ordenRepository.findAllBy(criterio);  
     }
    
     public OrdenEntity findById(Integer ordenId){

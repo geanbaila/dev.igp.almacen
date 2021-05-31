@@ -113,10 +113,17 @@
                         <div class="d-flex flex-column-fluid">
                             <!--begin::Container-->
                             <div class="container-fluid">
-                                
-                                <form class="row g-3">
+                                <div class="row">
                                     <div class="col-12">
-                                        <table class="table table-striped ">
+                                        <div class="form-group mb-8">
+                                            <label>Buscar :</label>
+                                            <input type="text" class="form-control" onkeypress="javascript:if(event.keyCode==13){buscar(this);}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="row">
+                                    <div class="col-12">
+                                        <table class="table table-striped" id="table-list-almacen">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th scope="col">#</th>
@@ -157,7 +164,7 @@
                                                                     &nbsp;<a th:href="@{/almacen/listar?pagina={paginas} (paginas=${paginas})}">Último <i data-feather="chevron-right"></i></a>&nbsp;
                                                                 </div>
                                                                 <div th:unless="${paginas}==${data.totalPagina-1}" th:remove="tag">
-                                                                    &nbsp;<a th:href="@{/almacen/listar?pagina={paginas} (paginas=${paginas})}" th:text="${paginas}"></a>&nbsp;
+                                                                    &nbsp;<a th:href="@{/almacen/listar?pagina={paginas} (paginas=${paginas})}" th:text="${paginas}" class="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"></a>&nbsp;
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -166,6 +173,26 @@
                                             </tfoot>
                                         </table>
                                         <script>
+                                            function buscar(obj){
+                                                if(obj.value==""){
+                                                    window.location.reload();
+                                                }else{
+                                                    $.ajax({
+                                                        url:'/almacen/buscar',
+                                                        data: {
+                                                            'criterio':obj.value
+                                                        },
+                                                        type:'POST',
+                                                        //dataType:'JSON',
+                                                        success:function(result){
+                                                            $("#table-list-almacen").find("tbody").html(result)
+                                                        },complete:function(){
+                                                            $("#table-list-almacen").find("tfoot").css("display","none");
+                                                        }
+                                                    });
+                                                }
+                                            }
+
                                             function eliminarItem(itemId,element){
                                                 $.ajax({
                                                     url:'/almacen/eliminar/'+itemId,

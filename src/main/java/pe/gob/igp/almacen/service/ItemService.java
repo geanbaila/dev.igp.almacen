@@ -71,4 +71,8 @@ public class ItemService {
         auditoriaService.save(auditoria);
     }
 
+    public List<ItemEntity> buscar(String criterio){
+        return itemRepository.advantageSearch(criterio);
+    }
+
 }

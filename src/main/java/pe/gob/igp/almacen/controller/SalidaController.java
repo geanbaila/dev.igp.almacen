@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.function.EntityResponse;
 
+import io.micrometer.core.ipc.http.HttpSender.Request;
 import pe.gob.igp.almacen.entity.EstadoOrdenEntity;
 import pe.gob.igp.almacen.entity.MarcaEntity;
 import pe.gob.igp.almacen.entity.ModeloEntity;
@@ -85,9 +90,11 @@ public class SalidaController {
     private OrdenDetalleService ordenDetalleService;
     
     @GetMapping({"","listar"})
-    public ModelAndView home(@RequestParam(name="pagina", defaultValue = "0") Integer pagina){
-        Pageable pageable = PageRequest.of(pagina, paginaFilas);
-        Map<String,Object> data = ordenService.getOrden(pageable);
+    public ModelAndView home(
+        @RequestParam(name="pagina", required = false, defaultValue = "0") Integer pagina,
+        @RequestParam(name="criterio", required = false, defaultValue = "") String criterio){
+        Pageable pageable = PageRequest.of(pagina, paginaFilas, Sort.Direction.DESC, "id");
+        Map<String,Object> data = ordenService.getOrden(pageable, criterio);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("data", data);
         modelAndView.setViewName("salida/listar");
@@ -184,10 +191,10 @@ public class SalidaController {
             destino,
             fechaSalidaPrevista,
             fechaRetornoPrevista,
-            recepciona,
+            recibe,
             comisionadoDni,
             comisionadoArea,
-            recibe,
+            recepciona,
             autorizaDni,
             autorizaArea,
             accesorio,
@@ -248,10 +255,10 @@ public class SalidaController {
             destino,
             fechaSalidaPrevista,
             fechaRetornoPrevista,
-            recepciona,
+            recibe,
             comisionadoDni,
             comisionadoArea,
-            recibe,
+            recepciona,
             autorizaDni,
             autorizaArea,
             accesorio,
@@ -285,6 +292,28 @@ public class SalidaController {
         ordenDetalleService.remove(ordenDetalleId);
         logger.info("Se ha eliminado un orden de salida (ordenDetalleId:"+ordenDetalleId+").");
         return "salida/listar";
+    }
+
+    @PostMapping("buscar")
+    public ResponseEntity<String> buscar(@RequestParam("criterio") String criterio){
+        List<OrdenEntity> eanOrden = ordenService.getOrden(criterio);
+        String html ="";
+        for (OrdenEntity row : eanOrden) {
+            html+="<tr>";
+            html+="<td>"+row.getId()+"</td>";
+            html+="<td>"+row.getTipoOrden()+"</td>";
+            html+="<td>"+row.getRecibe().getNombre()+"</td>";
+            html+="<td>"+row.getRecepciona().getNombre()+"</td>";
+            html+="<td>"+row.getFechaRetornoPrevista()+"</td>";
+            html+="<td>"+row.getFechaSalidaPrevista()+"</td>";
+            html+="<td>"+row.getEstadoOrden().getNombre()+"</td>";
+            html+="<td></td>";
+            html+="<td></td>";
+            html+="<td></td>";
+            html+="<td></td>";
+            html+="</tr>";
+        }
+        return new ResponseEntity(html, HttpStatus.OK);
     }
 
 }

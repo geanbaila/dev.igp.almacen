@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.websocket.server.PathParam;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -64,11 +68,12 @@ public class AlmacenController {
 
     @GetMapping({"","listar"})
     public ModelAndView index(@RequestParam(name="pagina", defaultValue = "0") Integer pagina){
-        Pageable pageable = PageRequest.of(pagina, paginaFilas);
+        Pageable pageable = PageRequest.of(pagina, paginaFilas, Sort.Direction.DESC, "id");
         Map<String,Object> data = itemService.getItem(pageable);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("data", data);
         modelAndView.setViewName("item/listar");
+        //modelAndView.setViewName("item/ajax-client-side");
         logger.info("Listando los items.");
         return modelAndView;
     }
@@ -182,11 +187,37 @@ public class AlmacenController {
         return "redirect:/almacen"; 
     }
    
-    @PostMapping(value = "/eliminar/{itemId}")
+    @PostMapping("eliminar/{itemId}")
     public ResponseEntity<String> eliminar(@PathVariable("itemId") Integer itemId){
         itemService.remove(itemId);
         logger.info("Eliminación de un item (itemId:"+itemId+").");
         return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    @PostMapping("buscar")
+    public ResponseEntity<String> buscar(@PathParam("criterio") String criterio){
+        List<ItemEntity> eanItem = itemService.buscar(criterio);
+        String html = "";
+        for (ItemEntity row : eanItem) {
+            html+="<tr>";
+            html+="<td>"+row.getId()+"</td>";
+            html+="<td>"+row.getCodigoPatrimonial()+"</td>";
+            html+="<td>"+row.getDenominacion()+"</td>";
+            html+="<td>"+row.getMarca().getNombre()+"</td>";
+            html+="<td>"+row.getModelo().getNombre()+"</td>";
+            html+="<td>"+row.getSerie()+"</td>";
+            html+="<td>"+row.getCodigoAmbiente()+"</td>";
+            html+="<td></td>";
+            html+="</tr>";
+        } 
+        return new ResponseEntity<>(html, HttpStatus.OK);
+    }
+
+    @GetMapping("importar")
+    public ModelAndView importar(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("item/importar");
+        return modelAndView;
     }
 
 }

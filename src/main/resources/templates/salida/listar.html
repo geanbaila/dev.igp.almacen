@@ -108,15 +108,22 @@
                         <div class="d-flex flex-column-fluid">
                             <!--begin::Container-->
                             <div class="container-fluid">
-                                <form class="row g-3">
+                                <div class="row">
                                     <div class="col-12">
-                                        <table class="table table-striped ">
+                                        Buscar: 
+                                        <input type="text" class="form-control" onkeypress="javascript:if(event.keyCode==13){buscar(this);}"/><br/>
+                                        <a th:href="@{/salida/listar}" class="btn btn-secondary">Borrar filtros</a>
+                                    </div>
+                                </div>
+                                <form class="row">
+                                    <div class="col-12">
+                                        <table class="table table-striped " id="table-list-orden">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th scope="col">#</th>
+                                                    <th scope="col">Orden Salida</th>
                                                     <th scope="col">T. movimiento</th>
                                                     <th scope="col">Recibe</th>
-                                                    <th scope="col">Recepciona</th>
                                                     <th scope="col">Fecha Salida</th>
                                                     <th scope="col">Estado</th>
                                                     <th scope="col">Firmas</th>
@@ -126,9 +133,9 @@
                                             <tbody th:each="orden : ${data.eanOrden}">
                                                 <tr>
                                                     <td th:text="${orden.id}"></td>
+                                                    <td th:text="${orden.numeroOrden}"></td>
                                                     <td th:text="${orden.motivo.nombre}"></td>
                                                     <td th:text="${orden.recibe.nombre}"></td>
-                                                    <td th:text="${orden.recepciona.nombre}"></td>
                                                     <td th:text="${orden.fechaSalidaPrevista}"></td>
                                                     <td><span th:text="${orden.estadoOrden.nombre}"
                                                         class="label label-inline label-light-primary font-weight-bold"></span></td>
@@ -159,6 +166,24 @@
                                             </tfoot>
                                         </table>
                                         <script>
+                                            function buscar(obj){
+                                                if(obj.value==""){
+                                                    window.location.reload();
+                                                }else{
+                                                    $.ajax({
+                                                        url:'/salida/buscar',
+                                                        data:{
+                                                            'criterio':obj.value
+                                                        },
+                                                        type:'POST',
+                                                        success:function(result){
+                                                            $("#table-list-orden").find("tbody").html(result);
+                                                        },complete: function(){
+                                                            $("#table-list-orden").find("tfoot").css("display","none");
+                                                        }
+                                                    });
+                                                }
+                                            }
                                             function eliminarSalida(ordenId,element){
                                                 $.ajax({
                                                     url:'/salida/eliminar/'+ordenId,
