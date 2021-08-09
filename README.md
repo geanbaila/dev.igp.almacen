@@ -8,7 +8,8 @@ Características del software:
 3. Emitir hojas de préstamo temporal 
 
  ## Final results
-![github-small](https://github.com/geanbaila/dev.igp.almacen.git/blob/main/img1.png)
-![github-small](https://github.com/geanbaila/dev.igp.almacen.git/blob/main/img2.png)
-![github-small](https://github.com/geanbaila/dev.igp.almacen.git/blob/main/img3.png)
+![github-small](https://github.com/geanbaila/dev.igp.almacen/blob/main/img1.png)
+![github-small](https://github.com/geanbaila/dev.igp.almacen/blob/main/img2.png)
+![github-small](https://github.com/geanbaila/dev.igp.almacen/blob/main/img3.png)
+![github-small](https://github.com/geanbaila/dev.igp.almacen/blob/main/img4.png)
 
